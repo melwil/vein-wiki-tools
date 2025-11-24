@@ -23,6 +23,7 @@ class Family(family.Family):
 
         Go to https://vein.wiki.gg/wiki/Special:Version
         Entry point URLs -> Script path goes below
+        Note: If it's just '/', return an empty string
         """
         return ""
 
