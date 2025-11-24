@@ -1,0 +1,33 @@
+# dev environment
+.env
+cert/
+*.log
+testdata/
+__pycache__/
+*.pyc
+*.egg-info/
+.DS_Store
+.idea
+*.pyproj.user
+.vscode
+.mypy_cache*
+.pytest_cache*
+
+# code coverage
+.coverage*
+htmlcov/
+typings/
+
+# build
+dist/
+
+# database dumps
+/*.dump
+cache/
+
+# pywikibot runtime and config files
+user-config.py
+user-password.*
+apicache/
+pywikibot-*
+throttle.ctrl
