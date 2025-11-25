@@ -8,7 +8,12 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pywikibot (>=10.7.0,<11.0.0)"
+    "pywikibot (>=10.7.0,<11.0.0)",
+    "pydantic (>=2.12.4,<3.0.0)",
+    "aiocsv (>=1.4.0,<2.0.0)",
+    "aiofiles (>=25.1.0,<26.0.0)",
+    "pytest-asyncio (>=1.3.0,<2.0.0)",
+    "types-aiofiles (>=25.1.0.20251011,<26.0.0.0)"
 ]
 
 [tool.poetry]
@@ -17,3 +22,32 @@ packages = [{include = "vein_wiki_tools", from = "src"}]
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+target-version = ["py311"]
+line-length = 200
+
+[tool.isort]
+# The following settings resolve conflicts between isort and black.
+# See: https://black.readthedocs.io/en/stable/compatible_configs.html
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 200                     # Should be the same as black's default line-length
+
+[tool.pytest.ini_options]
+testpaths = ["tests/"]
+addopts = "--durations=12 -p no:ddtrace"
+asyncio_mode = "auto"                    # See pytest-asyncio plug-in
+
+[dependency-groups]
+dev = [
+    "pytest (>=8.4.2,<9.0.0)",
+    "isort (>=6.1.0,<7.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)",
+    "black (>=25.9.0,<26.0.0)",
+    "pytest-asyncio (>=1.2.0,<2.0.0)",
+    "mypy (>=1.18.2,<2.0.0)"
+]
