@@ -1,0 +1,30 @@
+= Shovel =
+{{Item infobox
+| image = Shovel.png
+| description = A shovel. Good for injuring others but even better for crafting.<br><br>Can be used for burying stash containers.<br><br>Hit the ground to get soil, usable in planters. If it's raining, you can get fishing bait sometimes as well.
+| obtain = ??
+| usage = Crafting
+| kilograms = 3.4 kg
+| pounds = 7.5 lbs
+}}
+
+== Use ==
+
+=== Repair ===
+Shovel can be [[Repair|repaired]] using the following ingredients:
+{| class="wikitable"
+! Item
+! Quantity
+|-
+| Iron Scrap
+| 1
+|}
+
+ 
+
+{{ NavBarItems }}
+
+[[Category:Weapons]]
+
+-------------------------
+'''Summary:''' Creating page for ammo item: Shovel

@@ -1,0 +1,29 @@
+{{Infobox
+| class       = custom
+}}
+
+'''Shovel''' is a tool in '''Vein''' which can also be wielded as a [[Bladed Weapons|bladed weapon]]. It is used to satisfy the [[Digging]] tool requirement.
+
+== More Attributes ==
+{| class="wikitable"
+! Property !! Value
+|-
+| Craftable || No
+|-
+| Lootable || Yes
+|-
+| Repairable || Yes
+|-
+| Stackable || No
+|}
+
+
+== Acquiring ==
+* Shovels can be found in the world, in graveyards, sheds or different warehouses.
+
+== Use ==
+=== Building ===
+* [[Construction Menu]]: Used when constructing a Well
+
+=== Dismantling ===
+* Will produce a random amount (??) of ??.
