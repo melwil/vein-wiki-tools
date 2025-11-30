@@ -1,9 +1,11 @@
+import re
 from typing import Any
 
 from pydantic import Field, ValidationInfo, model_validator
 
 from vein_wiki_tools.base import RootSchema
 from vein_wiki_tools.models.items import Item
+from vein_wiki_tools.utils.metrology import imperial_to_metric
 
 
 class CsvItem(RootSchema):
@@ -12,7 +14,7 @@ class CsvItem(RootSchema):
     description: str = Field(..., alias="Description")
     category: str = Field(..., alias="Category")
     weight: float = Field(..., alias="Weight")
-    stackable: bool = Field(..., alias="Stackable")
+    stackable: bool | None = Field(default=None, alias="Stackable")
     stack_size: int | None = Field(default=None, alias="StackSize")
     capacity: int | None = Field(default=None, alias="Capacity")
     scent_strength: int | None = Field(default=None, alias="ScentStrength")
@@ -38,10 +40,11 @@ class CsvItem(RootSchema):
         return Item(
             filename=self.filename,
             name=self.name,
-            description=self.description,
+            description=re.sub(r"\s{2,}", "<br><br>", self.description).strip(),
             category=self.category,
-            weight=self.weight,
-            stackable=self.stackable,
+            weight_lbs=self.weight,
+            weight_kg=imperial_to_metric(pounds=self.weight),
+            stackable=self.stackable or False,
             stack_size=self.stack_size,
             capacity=self.capacity,
             scent_strength=self.scent_strength,
@@ -55,20 +58,6 @@ class CsvItem(RootSchema):
 
 
 def strings_equal_to_none(v: Any) -> Any:
-    if (
-        v == ""
-        or v == "0"
-        or v == "null"
-        or v == "undefined"
-        or v == "None"
-        or v == "NaN"
-        or v == "[]"
-        or v == "{}"
-        or v == "()"
-        or v == "''"
-        or v == '""'
-        or v == "N/A"
-        or v == r"N\/A"
-    ):
+    if v == "" or v == "0" or v == "null" or v == "undefined" or v == "None" or v == "NaN" or v == "[]" or v == "{}" or v == "()" or v == "''" or v == '""' or v == "N/A" or v == r"N\/A":
         return None
     return v

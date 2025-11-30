@@ -31,26 +31,17 @@ class Item(RootSchema):
     name: str = Field(..., serialization_alias="Name")
     description: str = Field(..., serialization_alias="Description")
     category: str = Field(..., serialization_alias="Category")
-    weight: float = Field(..., serialization_alias="Weight")
-    stackable: bool = Field(..., serialization_alias="Stackable")
+    weight_lbs: float = Field(..., serialization_alias="Weight (lbs)")
+    weight_kg: float = Field(..., serialization_alias="Weight (kg)")
+    stackable: bool = Field(default=False, serialization_alias="Stackable")
     stack_size: int | None = Field(default=None, serialization_alias="StackSize")
     capacity: int | None = Field(default=None, serialization_alias="Capacity")
-    scent_strength: int | None = Field(
-        default=None, serialization_alias="ScentStrength"
-    )
-    compost_quality: int | None = Field(
-        default=None, serialization_alias="CompostQuality"
-    )
-    hunger_satisfaction: int | None = Field(
-        default=None, serialization_alias="HungerSatisfaction"
-    )
-    thirst_addition: int | None = Field(
-        default=None, serialization_alias="ThirstAddition"
-    )
+    scent_strength: int | None = Field(default=None, serialization_alias="ScentStrength")
+    compost_quality: int | None = Field(default=None, serialization_alias="CompostQuality")
+    hunger_satisfaction: int | None = Field(default=None, serialization_alias="HungerSatisfaction")
+    thirst_addition: int | None = Field(default=None, serialization_alias="ThirstAddition")
     days_to_decay: int | None = Field(default=None, serialization_alias="DaystoDecay")
-    rotten_scent_strength: int | None = Field(
-        default=None, serialization_alias="RottenScentStrength"
-    )
+    rotten_scent_strength: int | None = Field(default=None, serialization_alias="RottenScentStrength")
     repair_tools: str | None = Field(default=None, serialization_alias="RepairTools")
     repair_ingredients: list[RepairIngredient] = Field(
         default_factory=list,

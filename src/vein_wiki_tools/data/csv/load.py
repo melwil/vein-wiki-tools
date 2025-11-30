@@ -6,12 +6,12 @@ from vein_wiki_tools.models.items import DismantleResult, Item, RepairIngredient
 
 
 async def csv_read(
-    file_path: str,
+    filepath: str,
     delimiter: str = ",",
     quotechar: str = '"',
 ) -> list[Item]:
     item_list: list[Item] = []
-    async with aiofiles.open(file_path, mode="r", encoding="utf-8", newline="") as afp:
+    async with aiofiles.open(filepath, mode="r", encoding="utf-8", newline="") as afp:
         async for row in AsyncDictReader(afp, delimiter=delimiter, quotechar=quotechar):
             item = to_item(row)  # type: ignore
             item_list.append(item)
@@ -45,5 +45,4 @@ def to_item(csv_item: dict) -> Item:
     item.repair_ingredients = repair_ingredients
     item.dismantle_results = dismantle_results
 
-    return item
     return item

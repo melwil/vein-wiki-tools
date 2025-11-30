@@ -1,0 +1,11 @@
+{% if subject.repair_ingredients %}
+=== Repair ===
+{{ subject.name }} can be [[Repair|repaired]] using the following ingredients:
+{| class="wikitable"
+! Item
+! Quantity
+{% for result in subject.repair_ingredients %}|-
+| {{ result.name }}
+| {{ result.quantity }}
+{% endfor %}|}
+{% endif %}
