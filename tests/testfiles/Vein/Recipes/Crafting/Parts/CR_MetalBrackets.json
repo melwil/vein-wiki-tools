@@ -1,0 +1,89 @@
+[
+  {
+    "Type": "BaseRecipe",
+    "Name": "CR_MetalBrackets",
+    "Class": "UScriptClass'BaseRecipe'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "RecipeName": {
+        "Namespace": "",
+        "Key": "8607A77A4CB6166B9948CDB5B637733C",
+        "SourceString": "Metal Brackets",
+        "LocalizedString": "Metal Brackets"
+      },
+      "RecipeFlavorText": {
+        "Namespace": "",
+        "Key": "8ED02780465F9D89006A1B88CA560E6D",
+        "SourceString": "A foundational piece of most fortifications and other large projects.",
+        "LocalizedString": "A foundational piece of most fortifications and other large projects."
+      },
+      "PossibleIngredients": [
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_IronScrap_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_IronScrap.0"
+              },
+              "Quantity": 1
+            }
+          ],
+          "IngredientTags": [],
+          "ToolObjects": [
+            {
+              "ObjectName": "Tool'T_Hammer'",
+              "ObjectPath": "Vein/Content/Vein/Tools/T_Hammer.0"
+            },
+            {
+              "ObjectName": "Tool'T_BasicPliers'",
+              "ObjectPath": "Vein/Content/Vein/Tools/T_BasicPliers.0"
+            }
+          ],
+          "Fluids": [],
+          "bOnlyOneToolNeeded": false,
+          "WorkbenchType": {
+            "ObjectName": "WorkbenchType'WT_Standard'",
+            "ObjectPath": "Vein/Content/Vein/WorkbenchTypes/WT_Standard.0"
+          },
+          "bEnabled": true,
+          "bNoCookedItems": false
+        }
+      ],
+      "Results": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_MetalBrackets_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_MetalBrackets.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "RecipeType": {
+        "ObjectName": "RecipeType'RT_StandardParts'",
+        "ObjectPath": "Vein/Content/Vein/RecipeTypes/RT_StandardParts.0"
+      },
+      "CraftingRewardXP": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Crafting.ST_Crafting_C'",
+          "Value": 100.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Mechanical.ST_Mechanical_C'",
+          "Value": 100.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Construction.ST_Construction_C'",
+          "Value": 100.0
+        }
+      ],
+      "bDefaultUnlocked": true,
+      "CraftTime": 4.0,
+      "CraftLoopSound": {
+        "ObjectName": "SoundCue'SC_CraftLoop1'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Crafting/SC_CraftLoop1.0"
+      },
+      "ScentStrength": 0.0,
+      "ScentStrengthBurning": 0.0
+    }
+  }
+]

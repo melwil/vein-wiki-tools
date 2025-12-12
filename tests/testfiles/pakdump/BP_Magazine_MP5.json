@@ -1,0 +1,87 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_Magazine_MP5_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'MagazineItem'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_Magazine_MP5_C'Default__BP_Magazine_MP5_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Ammo/BP_Magazine_MP5.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_Magazine_MP5_C",
+    "Name": "Default__BP_Magazine_MP5_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Ammo/BP_Magazine_MP5.BP_Magazine_MP5_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Capacity": 30,
+      "BulletType": {
+        "ObjectName": "BlueprintGeneratedClass'BP_Ammo_9mm_C'",
+        "ObjectPath": "Vein/Content/Vein/Items/Ammo/BP_Ammo_9mm.0"
+      },
+      "Weight": 0.15,
+      "MaxStack": 1,
+      "Type": {
+        "ObjectName": "ItemType'IT_Ammo'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Ammo.0"
+      },
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "Namespace": "",
+        "Key": "8534E3E649A885339248EAB85CD5EB83",
+        "SourceString": "R&F MP5 Magazine - 30 Round",
+        "LocalizedString": "R&F MP5 Magazine - 30 Round"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/Weapons/AdvanceWeaponPack/Mesh/Weapon/SMG/SM_PX-70_Mag.SM_PX-70_Mag",
+        "SubPathString": ""
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "AB1D8608423795A1C583F588329E6A32",
+        "SourceString": "An NP5 magazine. Holds 9mm Rounds.",
+        "LocalizedString": "An NP5 magazine. Holds 9mm Rounds."
+      },
+      "EquippableSetup": {
+        "EquippableStaticMesh": {
+          "AssetPathName": "/Game/Marketplace/Weapons/FPSHandguns_VOL2/Meshes/SM_Ogre9_01i.SM_Ogre9_01i",
+          "SubPathString": ""
+        }
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_Metal_Machinery_Small'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_Metal_Machinery_Small.0"
+      },
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "Tags": [
+        {
+          "ObjectName": "TagAsset'TAG_Metal'",
+          "ObjectPath": "Vein/Content/Vein/TagAssets/TAG_Metal.0"
+        }
+      ],
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/Items/Ammo/T_Thumb_BP_Magazine_MP5_0.T_Thumb_BP_Magazine_MP5_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

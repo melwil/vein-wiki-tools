@@ -1,23 +1,19 @@
 from pathlib import Path
 
-from vein_wiki_tools.utils.file_helper import get_import_path, get_output_path
+from vein_wiki_tools.utils.file_helper import get_import_path
 from vein_wiki_tools.utils.logging import getLogger
 
 logger = getLogger(__name__)
 
 
-async def create_page(filename: str, name: str, text: str, summary: str):
-    with open(get_output_path("wiki") / filename, "w", encoding="utf-8") as f:
-        f.write(
-            f"""
-{text}
--------------------------
-'''Summary:''' {summary}"""
-        )
+async def create_page(path: Path, text: str, summary: str):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
 
 
-async def edit_page(filename: str, name: str, text: str, summary: str):
-    await create_page(filename, name, text, summary)
+async def edit_page(path: Path, text: str, summary: str):
+    await create_page(path, text, summary)
 
 
 async def read_page(

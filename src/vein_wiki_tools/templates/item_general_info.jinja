@@ -1,28 +1,23 @@
-{% extends "base.jinja" %}
-
-{% block body %}
-
-{% include "item_infobox.jinja" %}
-
-{# == Source == #}
+{% if obtaining %}
+== Obtaining ==
 {# include "cooking.jinja" #}
 {# include "crafting.jinja" #}
 {# include "dismantle.jinja" #}
 {# include "static_spawns.jinja" #}
 {# include "scavenging.jinja" #}
+{% endif%}
 
-{% if subject.repair_ingredients %}
-== Use ==
-{% include "repair.jinja" %}
+
+{% if usage %}
+== Usage ==
+{# include "repair.jinja" #}
 {# include "cooking.jinja" #} 
 {# include "crafting.jinja" #}
-{# include "dismantle.jinja" #}
+{% include "dismantle_into.jinja" %}
 {# include "fuel.jinja" #}
 {# include "consumption.jinja" #}
 {# include "car_modification.jinja" #}
 {# include "weapon_modification.jinja" #}
 {# include "building.jinja" #}
 {% endif%}
-
 {% raw %}{{ NavBarItems }}{% endraw %}
-{% endblock body %}

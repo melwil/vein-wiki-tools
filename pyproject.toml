@@ -15,7 +15,8 @@ dependencies = [
     "pytest-asyncio (>=1.3.0,<2.0.0)",
     "types-aiofiles (>=25.1.0.20251011,<26.0.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
-    "pytest-icdiff (>=0.9,<0.10)"
+    "pytest-icdiff (>=0.9,<0.10)",
+    "pytest-mock (>=3.15.1,<4.0.0)"
 ]
 
 [tool.poetry]

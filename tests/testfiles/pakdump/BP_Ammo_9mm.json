@@ -1,0 +1,80 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_Ammo_9mm_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'BulletItem'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_Ammo_9mm_C'Default__BP_Ammo_9mm_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Ammo/BP_Ammo_9mm.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_Ammo_9mm_C",
+    "Name": "Default__BP_Ammo_9mm_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Ammo/BP_Ammo_9mm.BP_Ammo_9mm_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "BulletType": {
+        "ObjectName": "BulletType'BT_9mm'",
+        "ObjectPath": "Vein/Content/Vein/BulletTypes/BT_9mm.0"
+      },
+      "Weight": 0.017637,
+      "bStackable": true,
+      "Type": {
+        "ObjectName": "ItemType'IT_Ammo'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Ammo.0"
+      },
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "Namespace": "",
+        "Key": "13E77D75E5E746DAA1FC60C3181EA5ED",
+        "SourceString": "9mm Round",
+        "LocalizedString": "9mm Round"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/Props/BulletsPack/StaticMeshes/9mm/OS_Ammo_9_Box3.OS_Ammo_9_Box3",
+        "SubPathString": ""
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "2B3DC6EBA0B1471994EB5B1815475A5C",
+        "SourceString": "A box of 9mm rounds.",
+        "LocalizedString": "A box of 9mm rounds."
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_Ammo_Object'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_Ammo_Object.0"
+      },
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "Tags": [
+        {
+          "ObjectName": "TagAsset'TAG_Metal'",
+          "ObjectPath": "Vein/Content/Vein/TagAssets/TAG_Metal.0"
+        }
+      ],
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/Items/Ammo/T_Thumb_BP_Ammo_9mm_0.T_Thumb_BP_Ammo_9mm_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

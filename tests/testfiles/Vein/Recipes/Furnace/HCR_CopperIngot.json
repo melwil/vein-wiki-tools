@@ -1,0 +1,75 @@
+[
+  {
+    "Type": "HeatConverterRecipe",
+    "Name": "HCR_CopperIngot",
+    "Class": "UScriptClass'HeatConverterRecipe'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "PossibleIngredients": [
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_RawChalcopyrite_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_RawChalcopyrite.0"
+              },
+              "Quantity": 3
+            }
+          ]
+        },
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_ElectricalScrap_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_ElectricalScrap.0"
+              },
+              "Quantity": 5
+            }
+          ]
+        },
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_WireBundle_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_WireBundle.0"
+              },
+              "Quantity": 10
+            }
+          ]
+        }
+      ],
+      "Result": {
+        "Item": {
+          "ObjectName": "BlueprintGeneratedClass'BP_CopperIngot_C'",
+          "ObjectPath": "Vein/Content/Vein/Items/Crafting/Crafted/Smelted/BP_CopperIngot.0"
+        }
+      },
+      "ResultXP": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Crafting.ST_Crafting_C'",
+          "Value": 180.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Mechanical.ST_Mechanical_C'",
+          "Value": 180.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Electrical.ST_Electrical_C'",
+          "Value": 180.0
+        }
+      ],
+      "HeatConverterTypes": [
+        {
+          "ObjectName": "HeatConverterType'HCT_Forge'",
+          "ObjectPath": "Vein/Content/Vein/HeatConverterTypes/HCT_Forge.0"
+        },
+        {
+          "ObjectName": "HeatConverterType'HCT_IndustrialForge'",
+          "ObjectPath": "Vein/Content/Vein/HeatConverterTypes/HCT_IndustrialForge.0"
+        }
+      ]
+    }
+  }
+]

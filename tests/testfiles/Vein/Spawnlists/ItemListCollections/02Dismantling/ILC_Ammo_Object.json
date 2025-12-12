@@ -1,0 +1,36 @@
+[
+  {
+    "Type": "ItemSpawnlist",
+    "Name": "ILC_Ammo_Object",
+    "Class": "UScriptClass'ItemSpawnlist'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Lists": [
+        {
+          "List": {
+            "ObjectName": "ItemList'IL_ScrapPlastic'",
+            "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemLists/02Dismantling/IL_ScrapPlastic.0"
+          },
+          "SpawnChance": "ERarity::Common",
+          "ChanceToNotSpawn": 0.0,
+          "Tags": [],
+          "bOnlyInTagVolume": false
+        },
+        {
+          "List": {
+            "ObjectName": "ItemList'IL_Gunpowder'",
+            "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemLists/02Dismantling/IL_Gunpowder.0"
+          },
+          "SpawnChance": "ERarity::Likely",
+          "ChanceToNotSpawn": 0.1,
+          "Tags": [],
+          "bOnlyInTagVolume": false
+        }
+      ],
+      "ItemCount": {
+        "min": 1,
+        "max": 2
+      }
+    }
+  }
+]

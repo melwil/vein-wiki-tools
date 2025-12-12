@@ -2,15 +2,15 @@ def imperial_to_metric(
     pounds: float | None = None,
     feet: float | None = None,
     inches: float | None = None,
-) -> float:
+) -> float | None:
     if pounds is not None:
-        kilograms = round(pounds * 0.45359237, 1)
+        kilograms = pounds * 0.45359237
         return kilograms
     if inches is not None:
-        meters = round(inches * 0.0254, 2)
+        meters = inches * 0.0254
         return meters
     if feet is not None:
-        meters = round(feet * 0.3048, 2)
+        meters = feet * 0.3048
         return meters
 
-    return 0.0
+    return None

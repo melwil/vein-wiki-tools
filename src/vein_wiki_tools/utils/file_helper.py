@@ -4,6 +4,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 
+def get_vein_root() -> Path:
+    VEIN_PAK_DUMP_ROOT = Path("/mnt/c/Users/havard/Downloads/Vein")
+    return VEIN_PAK_DUMP_ROOT
+
+
 def get_full_file_path(project_file_path: str) -> str:
     """
     Get the full path for a file relative to the "src/vein_wiki_tools" as base folder

@@ -1,0 +1,14 @@
+{% set dismantle = usage.get("dismantle_into") %}
+{% if dismantle %}
+=== Dismantle ===
+{{ model.display_name() }} can be [[Dismantling|dismantled]]. Dismantling gives you a number of rolls at a set of item lists.
+{| class="wikitable"
+! Tool
+! Rolls
+! Item lists
+|-
+| {{ dismantle.tools_str() }} 
+| {{ dismantle.rolls_str() }}
+| {{ dismantle.results_str() }}
+|}
+{% endif %}

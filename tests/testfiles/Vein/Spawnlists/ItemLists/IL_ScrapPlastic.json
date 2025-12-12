@@ -1,0 +1,27 @@
+[
+  {
+    "Type": "ItemList",
+    "Name": "IL_ScrapPlastic",
+    "Class": "UScriptClass'ItemList'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Items": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_PlasticScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_PlasticScrap.0"
+          },
+          "ItemCount": {
+            "min": 1,
+            "max": 5
+          },
+          "SpawnChance": "ERarity::Uncommon",
+          "ChanceToNotSpawn": 0.0,
+          "ExtraItems": [],
+          "bRefrigerationNeeded": false,
+          "MaximumHeat": 5.0
+        }
+      ]
+    }
+  }
+]

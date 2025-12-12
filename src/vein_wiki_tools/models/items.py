@@ -1,6 +1,10 @@
+from enum import Enum
+
 from pydantic import Field
 
 from vein_wiki_tools.base import RootSchema
+from vein_wiki_tools.models.common import NodeContent
+from vein_wiki_tools.utils.metrology import imperial_to_metric
 
 
 class DismantleResult(RootSchema):
@@ -19,13 +23,7 @@ class RepairIngredient(RootSchema):
     quantity: int = Field(..., serialization_alias="Qty")
 
 
-# FileName
-# Name
-# Description
-# Category
-# Weight
-# Stackable
-# StackSize,Capacity,ScentStrength,CompostQuality,HungerSatisfaction,ThirstAddition,DaystoDecay,RottenScentStrength,RepairTools,RepairIngredient1_Name,RepairIngredient1_Qty,RepairIngredient2_Name,RepairIngredient2_Qty,RepairIngredient3_Name,RepairIngredient3_Qty,RepairIngredient4_Name,RepairIngredient4_Qty,DismantleResult1_Name,DismantleResult1_MinQty,DismantleResult1_MaxQty,DismantleResult2_Name,DismantleResult2_MinQty,DismantleResult2_MaxQty,DismantleResult3_Name,DismantleResult3_MinQty,DismantleResult3_MaxQty,DismantleResult4_Name,DismantleResult4_MinQty,DismantleResult4_MaxQty,DismantleResult5_Name,DismantleResult5_MinQty,DismantleResult5_MaxQty,DismantleResult6_Name,DismantleResult6_MinQty,DismantleResult6_MaxQty,DismantleResult7_Name,DismantleResult7_MinQty,DismantleResult7_MaxQty,DismantleResult8_Name,DismantleResult8_MinQty,DismantleResult8_MaxQty,DismantleResult9_Name,DismantleResult9_MinQty,DismantleResult9_MaxQty,DismantleResult10_Name,DismantleResult10_MinQty,DismantleResult10_MaxQty,DismantleResult11_Name,DismantleResult11_MinQty,DismantleResult11_MaxQty,DismantleResult12_Name,DismantleResult12_MinQty,DismantleResult12_MaxQty,DismantleResult13_Name,DismantleResult13_MinQty,DismantleResult13_MaxQty,DismantleResult14_Name,DismantleResult14_MinQty,DismantleResult14_MaxQty,DismantleResult15_Name,DismantleResult15_MinQty,DismantleResult15_MaxQty,DismantleResult16_Name,DismantleResult16_MinQty,DismantleResult16_MaxQty,DismantleResult17_Name,DismantleResult17_MinQty,DismantleResult17_MaxQty,DismantleResult18_Name,DismantleResult18_MinQty,DismantleResult18_MaxQty,DismantleResult19_Name,DismantleResult19_MinQty,DismantleResult19_MaxQty,DismantleResult20_Name,DismantleResult20_MinQty,DismantleResult20_MaxQty,DismantleResult21_Name,DismantleResult21_MinQty,DismantleResult21_MaxQty,DismantleResult22_Name,DismantleResult22_MinQty,DismantleResult22_MaxQty,DismantleResult23_Name,DismantleResult23_MinQty,DismantleResult23_MaxQty,DismantleResult24_Name,DismantleResult24_MinQty,DismantleResult24_MaxQty,DismantleResult25_Name,DismantleResult25_MinQty,DismantleResult25_MaxQty,DismantleResult26_Name,DismantleResult26_MinQty,DismantleResult26_MaxQty,DismantleResult27_Name,DismantleResult27_MinQty,DismantleResult27_MaxQty,DismantleResult28_Name,DismantleResult28_MinQty,DismantleResult28_MaxQty,DismantleResult29_Name,DismantleResult29_MinQty,DismantleResult29_MaxQty,DismantleResult30_Name,DismantleResult30_MinQty,DismantleResult30_MaxQty,DismantleResult31_Name,DismantleResult31_MinQty,DismantleResult31_MaxQty,DismantleResult32_Name,DismantleResult32_MinQty,DismantleResult32_MaxQty,DismantleResult33_Name,DismantleResult33_MinQty,DismantleResult33_MaxQty,DismantleResult34_Name,DismantleResult34_MinQty,DismantleResult34_MaxQty,DismantleResult35_Name,DismantleResult35_MinQty,DismantleResult35_MaxQty,DismantleResult36_Name,DismantleResult36_MinQty,DismantleResult36_MaxQty
+# For Items from google sheet csv
 class Item(RootSchema):
     filename: str = Field(..., serialization_alias="FileName")
     name: str = Field(..., serialization_alias="Name")
@@ -55,3 +53,65 @@ class Item(RootSchema):
         default_factory=list,
         serialization_alias="CraftingIngredients",
     )
+
+
+class BulletType(Enum):
+    BT_9MM = "9mm"
+    BT_45ACP = ".45 ACP"
+    BT_57MM = "5.7mm"
+    BT_40SW = ".40 S&W"
+    BT_223REM = ".223 Remington"
+    BT_556MM = "5.56mm"
+    BT_300BLK = ".300 Blackout"
+    BT_308WIN = ".308 Winchester"
+    BT_762MM = "7.62mm"
+    BT_50AE = ".50 AE"
+    BT_50BMG = ".50 BMG"
+    BT_12G = "12 Gauge"
+
+
+class ItemRoot(NodeContent):
+    # Simply the root node for the item graph
+    object_name_s: str = Field(default="ItemRoot")
+
+
+class Color(RootSchema):
+    r: float = Field(..., serialization_alias="R", validation_alias="R")
+    g: float = Field(..., serialization_alias="G", validation_alias="G")
+    b: float = Field(..., serialization_alias="B", validation_alias="B")
+    a: float = Field(..., serialization_alias="A", validation_alias="A")
+    hex: str = Field(..., serialization_alias="Hex", validation_alias="Hex")
+
+
+class ItemType(NodeContent):
+    type: str = Field(...)
+    name: dict[str, str] = Field(..., serialization_alias="Name")
+    icon: dict[str, str] = Field(..., serialization_alias="Icon", validation_alias="Icon")
+    color: Color = Field(..., serialization_alias="Color", validation_alias="Color")
+    order: int | None = Field(default=None, serialization_alias="Order", validation_alias="Order")
+
+
+class Ammo(NodeContent):
+    type: str = Field(..., serialization_alias="FileName")
+    name: str = Field(..., serialization_alias="Name", validation_alias="Name")
+    description: str = Field(..., serialization_alias="Description")
+    stackable: bool = Field(default=False, serialization_alias="Stackable")
+    stack_size: int | None = Field(default=None, serialization_alias="StackSize")
+    weight_lbs: float = Field(..., serialization_alias="Weight (lbs)")
+
+    @property
+    def weight_kg(self) -> float | None:
+        return imperial_to_metric(pounds=self.weight_lbs)
+
+
+class Magazine(NodeContent):
+    type: str = Field(..., serialization_alias="FileName")
+    name: str = Field(..., serialization_alias="Name", validation_alias="Name")
+    description: str = Field(..., serialization_alias="Description")
+    stackable: bool = Field(default=False, serialization_alias="Stackable")
+    stack_size: int | None = Field(default=None, serialization_alias="StackSize")
+    weight_lbs: float = Field(..., serialization_alias="Weight (lbs)")
+
+    @property
+    def weight_kg(self) -> float | None:
+        return imperial_to_metric(pounds=self.weight_lbs)

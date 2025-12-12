@@ -1,0 +1,108 @@
+[
+  {
+    "Type": "BaseRecipe",
+    "Name": "RP_MichiganSauce",
+    "Class": "UScriptClass'BaseRecipe'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "RecipeName": {
+        "Namespace": "",
+        "Key": "6B3216F94B652110C25382A586C1D180",
+        "SourceString": "Michigan Sauce",
+        "LocalizedString": "Michigan Sauce"
+      },
+      "RecipeFlavorText": {
+        "Namespace": "",
+        "Key": "4C8207C144E9BC07DC7C1BB413283BCF",
+        "SourceString": "A specialty in Plattsburgh, NY. This smooth meat sauce is typically served on top a hotdog in a steamed bun.",
+        "LocalizedString": "A specialty in Plattsburgh, NY. This smooth meat sauce is typically served on top a hotdog in a steamed bun."
+      },
+      "PossibleIngredients": [
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_Garlic_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Consumables/Fruit_Veggies/BP_Garlic.0"
+              },
+              "Quantity": 1
+            },
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_CannedTomatoes_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Consumables/Pantry/BP_CannedTomatoes.0"
+              },
+              "Quantity": 1
+            },
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_Beef_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Consumables/Meat/BP_Beef.0"
+              },
+              "Quantity": 1
+            }
+          ],
+          "IngredientTags": [],
+          "ToolObjects": [
+            {
+              "ObjectName": "Tool'T_Pot'",
+              "ObjectPath": "Vein/Content/Vein/Tools/T_Pot.0"
+            }
+          ],
+          "Fluids": [
+            {
+              "Key": "FluidDefinition'Vein/Content/Vein/Fluids/FL_HotSauce.FL_HotSauce'",
+              "Value": 250.0
+            }
+          ],
+          "bOnlyOneToolNeeded": false,
+          "WorkbenchType": {
+            "ObjectName": "WorkbenchType'WT_Stove'",
+            "ObjectPath": "Vein/Content/Vein/WorkbenchTypes/WT_Stove.0"
+          },
+          "bEnabled": true,
+          "bNoCookedItems": false
+        }
+      ],
+      "Results": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_MichiganSauce_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Consumables/CookedDishes/Pot/BP_MichiganSauce.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "RecipeType": {
+        "ObjectName": "RecipeType'RT_Cooking'",
+        "ObjectPath": "Vein/Content/Vein/RecipeTypes/RT_Cooking.0"
+      },
+      "CookingRewardXP": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Cooking.ST_Cooking_C'",
+          "Value": 293.0
+        }
+      ],
+      "CraftTime": 20.0,
+      "CookLimit": 2.5,
+      "CraftSuccessRange": {
+        "LowerBound": {
+          "Value": 0.8
+        },
+        "UpperBound": {
+          "Type": "ERangeBoundTypes::Inclusive",
+          "Value": 2.5
+        }
+      },
+      "CookLimitOverride": {
+        "ObjectName": "BlueprintGeneratedClass'BP_Ashes_C'",
+        "ObjectPath": "Vein/Content/Vein/Items/Junk/Trash/BP_Ashes.0"
+      },
+      "CraftLoopSound": {
+        "ObjectName": "SoundCue'SC_Boiling'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Crafting/SC_Boiling.0"
+      },
+      "MinimumHeatToCraft": 100.0
+    }
+  }
+]

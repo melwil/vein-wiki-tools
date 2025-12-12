@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+{% include "infobox_item.jinja" %}
+
+'''{{ model.display_name() }}''' is a type of [[Ammo|ammunition]] for [[Weapons#Ranged_Weapons|firearms]].
+
+{% include "item_general_info.jinja" %}
+{% endblock body %}

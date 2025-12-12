@@ -955,6 +955,24 @@ pprintpp = "*"
 pytest = "*"
 
 [[package]]
+name = "pytest-mock"
+version = "3.15.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "pytest_mock-3.15.1-py3-none-any.whl", hash = "sha256:0a25e2eb88fe5168d535041d09a4529a188176ae608a6d249ee65abc0949630d"},
+    {file = "pytest_mock-3.15.1.tar.gz", hash = "sha256:1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"},
+]
+
+[package.dependencies]
+pytest = ">=6.2.5"
+
+[package.extras]
+dev = ["pre-commit", "pytest-asyncio", "tox"]
+
+[[package]]
 name = "pytokens"
 version = "0.3.0"
 description = "A Fast, spec compliant Python 3.14+ tokenizer that runs on older Pythons."
@@ -1084,4 +1102,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "5e912b3ebf882eb2b9c70886d399995d7ed7e2cc5b2ae9b304960534b0ac02b6"
+content-hash = "21cf8dd7346dd8b0e2035783c8333e887763f00189f91ffa6d85e5080b14dafa"

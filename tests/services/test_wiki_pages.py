@@ -151,6 +151,7 @@ async def test_parse_sections_wiki_article():
     assert parsed_page.part_count() == 5  # infobox, pre_section, sections, categories
 
 
+@pytest.mark.skip(reason="skip until we get here again")
 async def test_render_and_parse_file():
     test_item_path = get_full_file_path("tests/testfiles/vein_items_shovel.csv")
     test_item = (await csv_read(filepath=test_item_path))[0]

@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+{% include "infobox_weapon.jinja" %}
+
+'''{{ model.display_name() }}''' is a [[Weapons#Ranged_Weapons|firearm]].
+
+{% include "item_general_info.jinja" %}
+{% endblock body %}

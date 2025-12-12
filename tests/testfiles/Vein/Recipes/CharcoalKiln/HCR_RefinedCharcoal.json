@@ -1,0 +1,52 @@
+[
+  {
+    "Type": "HeatConverterRecipe",
+    "Name": "HCR_RefinedCharcoal",
+    "Class": "UScriptClass'HeatConverterRecipe'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "PossibleIngredients": [
+        {
+          "Ingredients": [
+            {
+              "Item": {
+                "ObjectName": "BlueprintGeneratedClass'BP_Charcoal_C'",
+                "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_Charcoal.0"
+              },
+              "Quantity": 1
+            }
+          ]
+        }
+      ],
+      "Result": {
+        "Item": {
+          "ObjectName": "BlueprintGeneratedClass'BP_RefinedCharcoal_C'",
+          "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_RefinedCharcoal.0"
+        }
+      },
+      "IntervalBetweenConversions": 90.0,
+      "ResultXP": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Crafting.ST_Crafting_C'",
+          "Value": 60.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Scavenging.ST_Scavenging_C'",
+          "Value": 60.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Mechanical.ST_Mechanical_C'",
+          "Value": 60.0
+        }
+      ],
+      "HeatConverterTypes": [
+        {
+          "ObjectName": "HeatConverterType'HCT_AdvancedCharcoalKiln'",
+          "ObjectPath": "Vein/Content/Vein/HeatConverterTypes/HCT_AdvancedCharcoalKiln.0"
+        }
+      ],
+      "ConversionOverrideTemperature": 50.0,
+      "ConversionOverrideHeatInterval": 5.0
+    }
+  }
+]
