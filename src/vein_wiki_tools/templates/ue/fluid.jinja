@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+{% include "infobox_fluid.jinja" %}
+
+'''{{ model.display_name() }}''' is a type of fluid. 
+
+{% include "item_general_info.jinja" %}
+{% endblock body %}

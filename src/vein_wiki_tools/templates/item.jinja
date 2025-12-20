@@ -1,0 +1,10 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+{% include infobox.infobox_template %}
+
+{% for line in pre %}{{ line }}
+{% endfor %}
+
+{% include "item_general_info.jinja" %}
+{% endblock body %}

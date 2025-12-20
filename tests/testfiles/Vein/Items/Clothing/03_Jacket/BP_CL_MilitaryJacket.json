@@ -1,0 +1,132 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_CL_MilitaryJacket_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'ClothingItem'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_CL_MilitaryJacket_C'Default__BP_CL_MilitaryJacket_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Clothing/03_Jacket/BP_CL_MilitaryJacket.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_CL_MilitaryJacket_C",
+    "Name": "Default__BP_CL_MilitaryJacket_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Clothing/03_Jacket/BP_CL_MilitaryJacket.BP_CL_MilitaryJacket_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Weight": 4.25,
+      "Type": {
+        "ObjectName": "ItemType'IT_Clothing'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Clothing.0"
+      },
+      "bDamageable": true,
+      "DamageResults": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_ClothScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_ClothScrap.0"
+          },
+          "ItemCount": {
+            "min": 0,
+            "max": 2
+          }
+        }
+      ],
+      "BreakSound": {
+        "AssetPathName": "/Game/Vein/Audio/Effects/Destruction/SC_ClothRip.SC_ClothRip",
+        "SubPathString": ""
+      },
+      "RepairIngredients": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_DenimScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_DenimScrap.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "RepairToolObjects": [
+        {
+          "ObjectName": "Tool'T_BasicStapler'",
+          "ObjectPath": "Vein/Content/Vein/Tools/T_BasicStapler.0"
+        }
+      ],
+      "RepairSound": {
+        "AssetPathName": "/Game/Vein/Audio/Effects/Crafting/SC_CraftCloth.SC_CraftCloth",
+        "SubPathString": ""
+      },
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "Namespace": "",
+        "Key": "0B8B8C514D02EC9707DBAAA8E1210B0C",
+        "SourceString": "Military Jacket",
+        "LocalizedString": "Military Jacket"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/Environments/SuburbNeighborhoodHousePack/Meshes_usable/Interior_props_usable/SM_To_towel_table_A.SM_To_towel_table_A",
+        "SubPathString": ""
+      },
+      "ThumbnailMesh": {
+        "AssetPathName": "/Game/Marketplace/Characters/DazToUnreal/MilitaryJacket/SM_MilitaryJacket.SM_MilitaryJacket",
+        "SubPathString": ""
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "B07F15A54C3C91E1C4FC4D94515A5C6C",
+        "SourceString": "Part of a military uniform.",
+        "LocalizedString": "Part of a military uniform."
+      },
+      "EquippableSetup": {
+        "EquippableStaticMesh": {
+          "AssetPathName": "/Game/Marketplace/Environments/SuburbNeighborhoodHousePack/Meshes_usable/Interior_props_usable/SM_To_towel_table_A.SM_To_towel_table_A",
+          "SubPathString": ""
+        }
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_Denim_Object_Tier1'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_Denim_Object_Tier1.0"
+      },
+      "DismantlingRequirementTool": {
+        "ObjectName": "Tool'T_BasicCutting'",
+        "ObjectPath": "Vein/Content/Vein/Tools/T_BasicCutting.0"
+      },
+      "Conversions": [
+        {
+          "ObjectName": "ItemConversionSet'ICS_ClothClothing'",
+          "ObjectPath": "Vein/Content/Vein/ItemConversions/ICS_ClothClothing.0"
+        }
+      ],
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "bCanIgnite": true,
+      "ClothingArticle": {
+        "ObjectName": "ClothingArticle'CL_MilitaryJacket'",
+        "ObjectPath": "Vein/Content/Vein/Clothing/03_Jacket/CL_MilitaryJacket.0"
+      },
+      "TemperatureContribution": 3.0,
+      "RunSpeedMultiplier": 0.98,
+      "Thumbnail": {
+        "AssetPathName": "/Game/Marketplace/Characters/DazToUnreal/MilitaryJacket/T_Thumb_MilitaryJacket_0.T_Thumb_MilitaryJacket_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

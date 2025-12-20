@@ -1,0 +1,22 @@
+{% set requirements = usage.get("requirements") %}
+{% if requirements %}
+=== Requirements ===
+This tools needs certain items in order to function.
+
+{% if requirements.batteries %}
+==== Battery ====
+{{ model.display_name() }} requires batteries to operate.
+
+Possible variations of battery:{% for battery in requirements.batteries %}
+* {{ battery }}{% endfor %}
+{% endif %}
+
+{% if requirements.ammo %}
+==== {{ requirements.ammo_label }} ====
+{{ model.display_name() }} requires a {{ requirements.ammo_label }} to be used.
+
+Possible variations of {{ requirements.ammo_label }}:{% for possible in requirements.ammo %}
+* {{ possible }}{% endfor %}
+{% endif %}
+
+{% endif %}

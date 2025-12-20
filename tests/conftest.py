@@ -3,6 +3,8 @@ from pathlib import Path
 import pytest
 from pytest_mock import MockerFixture
 
+from vein_wiki_tools.utils import file_helper
+
 
 @pytest.fixture
 def testfiles():
@@ -10,8 +12,10 @@ def testfiles():
 
 
 @pytest.fixture(autouse=True)
-def mock_vein_root(mocker: MockerFixture, testfiles: Path):
-    mocker.patch(
-        "vein_wiki_tools.utils.file_helper.get_vein_root",
-        return_value=testfiles / "Vein",
+async def mock_vein_root(mocker: MockerFixture, testfiles: Path):
+    mocker.patch.object(
+        file_helper,
+        file_helper.get_vein_root.__name__,
+        autospec=True,
+        return_value=testfiles,
     )

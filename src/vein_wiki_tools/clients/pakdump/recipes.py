@@ -1,6 +1,6 @@
 from pydantic import Field
 
-from vein_wiki_tools.clients.pakdump.models import UEBaseModel, UECultureInvariantString, UELocalizedString, UEModel, UEQuantityModel, UEReference, UEStrKeyFloatValuePair
+from vein_wiki_tools.clients.pakdump.models import UEBaseModel, UECultureInvariantString, UELocalizedString, UEModel, UEModelInfo, UEQuantityModel, UEReference, UEStrKeyFloatValuePair
 
 
 class UEPossibleIngredients(UEBaseModel):
@@ -31,7 +31,9 @@ class UEBaseRecipeProperties(UEBaseModel):
 
 class UEBaseRecipe(UEModel):
     properties: UEBaseRecipeProperties = Field(..., alias="Properties")
+    _model_info: UEModelInfo = UEModelInfo(sub_type="base_recipe", super_type="recipe")
 
 
 class UEHeatConverterRecipe(UEModel):
     properties: UEBaseRecipeProperties = Field(..., alias="Properties")
+    _model_info: UEModelInfo = UEModelInfo(sub_type="heat_converter_recipe", super_type="recipe")

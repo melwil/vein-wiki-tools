@@ -1,0 +1,29 @@
+[
+  {
+    "Type": "FluidDefinition",
+    "Name": "FL_AnabolicSteroid",
+    "Class": "UScriptClass'FluidDefinition'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Name": {
+        "Namespace": "",
+        "Key": "A1D6444A4B1BC536F4ECC1A4AAE0EECF",
+        "SourceString": "Anabolic Steroid",
+        "LocalizedString": "Anabolic Steroid"
+      },
+      "bDecays": false,
+      "ConditionsOnInject": {
+        "ObjectName": "FoodConditionSet'FCS_AnabolicSteroid'",
+        "ObjectPath": "Vein/Content/Vein/Items/Consumables/Conditions/FCS_AnabolicSteroid.0"
+      },
+      "SmellText": {
+        "Namespace": "",
+        "Key": "5A76059448F52D0E72DD31BD62D28150",
+        "SourceString": "Smells like nothing.",
+        "LocalizedString": "Smells like nothing."
+      },
+      "Density": 1.19,
+      "DetergentMultiplier": -1.0
+    }
+  }
+]

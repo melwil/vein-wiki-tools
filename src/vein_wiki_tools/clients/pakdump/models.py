@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import logging
+import re
+from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
 from typing import Any, Iterable, Type, TypeVar
@@ -11,6 +13,15 @@ logger = logging.getLogger(__name__)
 
 VEIN_PAK_DUMP_ROOT = Path("/mnt/c/Users/havard/Downloads/Vein")
 N = TypeVar("N", bound="UEModel")
+
+
+@dataclass
+class UEModelInfo:
+    template: str | None = None
+    sub_type: str | None = None
+    super_type: str | None = None
+    console_name: str | None = None
+    categories: set[str] = field(default_factory=set)
 
 
 class UEFlags(Enum):
@@ -50,19 +61,64 @@ class UEBasePropertyModel(UEBaseModel):
 
 
 class UEModel(UEBaseModel):
+    # UE fields
     type: str = Field(..., alias="Type")
     name: str = Field(..., alias="Name")
-    template: str | None = Field(default=None)
-    console_name: str | None = Field(default=None)
+    super_struct: UEReference | None = Field(default=None, alias="SuperStruct")
+    # custom fields
+    _model_info: UEModelInfo = UEModelInfo()
 
     @property
-    def clean_type(self) -> str:
-        if not self.type.endswith("_C"):
-            logger.warning("Type name does not end with _C: %s", self.type)
-        return self.type[:-2]
+    def model_info(self) -> UEModelInfo:
+        if ton := self.get_type_object_name():
+            if match := re.match(r"(Item)Type'IT_(\w+)'", ton):
+                self._model_info.super_type = match.group(1).lower()
+                self._model_info.sub_type = match.group(2).lower()
+                self._model_info.template = self._model_info.super_type
+        elif self.super_struct is not None:
+            if match := re.match(r"Class'(.*)(Item)'", self.super_struct.object_name):
+                if item_type := match.group(1):
+                    self._model_info.sub_type = item_type.lower()
+                elif cn := self._model_info.console_name:
+                    if "melee" in cn.lower():
+                        self._model_info.sub_type = "melee"
+                elif self.get_prop("melee_time") is not None:
+                    self._model_info.sub_type = "melee"
+                self._model_info.super_type = match.group(2).lower()
+                self._model_info.template = match.group(2).lower()
+        return self._model_info
 
     def get_object_name(self) -> str:
         return f"{self.type}'{self.name}'"
+
+    def get_type_object_name(self) -> str:
+        if obj := getattr(self, "object", None):
+            if props := getattr(obj, "properties", None):
+                if _type := getattr(props, "type", None):
+                    return _type.object_name
+        return ""
+
+    def display_name(self) -> str:
+        if obj := getattr(self, "object", None):
+            if props := getattr(obj, "properties", None):
+                if name := getattr(props, "name", None):
+                    return str(name)
+        if props := getattr(self, "properties", None):
+            if name := getattr(props, "name", None):
+                return str(name)
+            if label := getattr(props, "label", None):
+                return str(label)
+        if match := re.match(r".*?_([^_]+)(_C)?", self.name):
+            return "".join(" " + c if c.isupper() else c for c in match.group(1)).strip()
+        raise ValueError(f"Unable to produce a display name for {self.get_object_name()}")
+
+    def get_prop(self, prop_name: str) -> Any:
+        if obj := getattr(self, "object", None):
+            if props := getattr(obj, "properties", None):
+                return getattr(props, prop_name, None)
+        if props := getattr(self, "properties", None):
+            return getattr(props, prop_name, None)
+        return None
 
     @classmethod
     def get_subclasses(cls) -> Iterable[Type[UEModel]]:
@@ -97,16 +153,31 @@ class UEStrKeyFloatValuePair(UEBaseModel):
     value: float = Field(..., alias="Value")
 
 
-class UEFluid(UEModel):
-    pass
+class UEItemTypeProperties(UEBaseModel):
+    name: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="Name")
+    icon: UEReference = Field(..., alias="Icon")
+    color: UEColor = Field(..., alias="Color")
+    order: int | None = Field(default=None)
+
+
+class UEToolSetup(UEBaseModel):
+    tools: list[UEReference] = Field(default_factory=list, alias="Tools")
+    has_ammo: bool | None = Field(default=None, alias="bHasAmmo")
+    default_ammo_item: UEReference | None = Field(default=None, alias="DefaultAmmoItem")
+    tool_ammo_label: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="ToolAmmoLabel")
+    possible_ammo_attachments: list[UEReference] = Field(default_factory=list, alias="PossibleAmmoItems")
 
 
 class UEItemType(UEModel):
-    pass
+    properties: UEItemTypeProperties = Field(..., alias="Properties")
+
+    def display_name(self) -> str:
+        return str(self.properties.name)
 
 
 class UELocalizedString(UEBaseModel):
-    namespace: str = Field(..., alias="Namespace")
+    namespace: str | None = Field(default=None, alias="Namespace")
+    table_id: str | None = Field(default=None, alias="TableId")
     key: str = Field(..., alias="Key")
     source_string: str = Field(..., alias="SourceString")
     localized_string: str = Field(..., alias="LocalizedString")
@@ -131,6 +202,8 @@ class UEBGCProperties(UEBaseModel):
     # common
     type: UEReference | None = Field(default=None, alias="Type")
     name: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="Name")
+    short_name: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="ShortName")
+    damage_type_name: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="DamageTypeName")
     description: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="Description")
     item_type: UEReference | None = Field(default=None, alias="Type")
     stackable: bool = Field(default=False, alias="bStackable")
@@ -138,9 +211,17 @@ class UEBGCProperties(UEBaseModel):
     damageable: bool | None = Field(default=None, alias="Damageable")
     weight_lbs: float | None = Field(default=None, alias="Weight")
     dismantling_results: UEReference | None = Field(default=None, alias="DismantlingResults")
+    min_damage_per_use: float | None = Field(default=None, alias="MinDamagePerUse")
+    max_damage_per_use: float | None = Field(default=None, alias="MaxDamagePerUse")
     repair_ingredients: list[UEQuantityModel] = Field(default_factory=list, alias="RepairIngredients")
     repair_tool_objects: list[UEReference] = Field(default_factory=list, alias="RepairToolObjects")
     tags: list[UEReference] = Field(default_factory=list, alias="Tags")
+    valid_batteries: list[UEReference] = Field(default_factory=list, alias="ValidBatteries")
+    # melee
+    melee_damage_multiplier: float | None = Field(default=None, alias="MeleeDamageMultiplier")
+    melee_time: float | None = Field(default=None, alias="MeleeTime")
+    melee_tiredness: float | None = Field(default=None, alias="MeleeTiredness")
+    damage_type_class: UEReference | None = Field(default=None, alias="DamageTypeClass")
     # firearm
     ammo_capacity: int | None = Field(default=None, alias="AmmoCapacity")
     ammo_classes: list[UEReference] = Field(default_factory=list, alias="AmmoClasses")
@@ -148,22 +229,32 @@ class UEBGCProperties(UEBaseModel):
     rounds_per_minute: float | None = Field(default=None, alias="RPM")
     reload_duration_secs: float | None = Field(default=None, alias="ReloadDuration")
     # ammo / magazine
-    capacity: int | None = Field(default=None, alias="Capacity")
+    capacity: float | int | None = Field(default=None, alias="Capacity")
     bullet_type: UEReference | None = Field(default=None, alias="BulletType")
-    # food
+    # food / fluids
     base_hunger_satisfaction: float | None = Field(default=None, alias="BaseHungerSatisfaction")
     thirst_addition: float | None = Field(default=None, alias="ThirstAddition")
     base_thirst_addition: float | None = Field(default=None, alias="BaseThirstAddition")
     conditions_on_eat: UEReference | None = Field(default=None, alias="ConditionsOnEat")
+    cooling_speed: float | None = Field(default=None, alias="CoolingSpeed")
+    fluid_type: UEReference | None = Field(default=None, alias="FluidType")
+    min_initial_amount: float | None = Field(default=None, alias="MinInitialAmount")
+    max_initial_amount: float | None = Field(default=None, alias="MaxInitialAmount")
+    # clothing
+    temperature_contribution: float | None = Field(default=None, alias="TemperatureContribution")
+    run_speed_multiplier: float | None = Field(default=None, alias="RunSpeedMultiplier")
+    can_hotwire_with: bool | None = Field(default=None, alias="bCanHotwireWith")
+    # Armor ratings are the amount of blocked HP
+    armor_ratings: list[UEStrKeyFloatValuePair] | None = Field(default=None, alias="ArmorRatings")
+    # Resistances are a multiplier showing the percent coming through
+    water_resistance: float | None = Field(default=None, alias="WaterResistance")
+    rain_resistance: float | None = Field(default=None, alias="RainResistance")
+    radiation_resistance: float | None = Field(default=None, alias="RadiationResistance")
+    # Tools
+    tool_setup: UEToolSetup | None = Field(default=None, alias="ToolSetup")
 
 
-class UEInterface(UEBaseModel):
-    type: str = Field(..., alias="Type")
-    name: str = Field(..., alias="Name")
-    properties: UEBGCProperties | None = Field(default=None, alias="Properties")
-
-
-class UEBGCObject(UEBaseModel):
+class UEBlueprintGeneratedClassObject(UEBaseModel):
     type: str = Field(..., alias="Type")
     name: str = Field(..., alias="Name")
     template: UEReference | None = Field(default=None, alias="Template")
@@ -178,12 +269,7 @@ class UEBGCObject(UEBaseModel):
 
 class UEBlueprintGeneratedClass(UEModel):
     super_struct: UEReference | None = Field(default=None, alias="SuperStruct")
-    object: UEBGCObject | None = Field(default=None, alias="objects")
-
-    def display_name(self) -> str:
-        if self.object is not None:
-            return str(self.object.properties.name)
-        return str(self.name)
+    object: UEBlueprintGeneratedClassObject | None = Field(default=None)
 
     def get_name(self) -> str:
         if self.object is not None:
@@ -198,12 +284,6 @@ class UEBlueprintGeneratedClass(UEModel):
             return None
         return f"{self.object.type}'{self.object.name}'"
 
-    def get_type_object_name(self) -> str:
-        if self.object is not None:
-            if self.object.properties.type is not None:
-                return self.object.properties.type.object_name
-        return f"{self.type}'{self.name}'"
-
     def get_prop_object_name(self, prop_name: str) -> str | None:
         if self.object is not None:
             prop = getattr(self.object.properties, prop_name, None)
@@ -211,11 +291,13 @@ class UEBlueprintGeneratedClass(UEModel):
                 return prop.object_name
         return None
 
-    def get_prop(self, prop_name: str) -> Any:
-        if self.object is not None:
-            return getattr(self.object.properties, prop_name, None)
-        # if self.interface.properties is not None:
-        #     return getattr(self.interface.properties, prop_name, None)
+    def get_resistance(self, name: str) -> float | None:
+        if obj := getattr(self, "object", None):
+            if props := getattr(obj, "properties", None):
+                if armor_ratings := getattr(props, "armor_ratings", None):
+                    for r in armor_ratings:
+                        if name in r.key.lower():
+                            return r.value
         return None
 
     def __repr__(self) -> str:

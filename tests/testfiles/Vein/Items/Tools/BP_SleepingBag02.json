@@ -1,0 +1,83 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_SleepingBag02_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'Item'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_SleepingBag02_C'Default__BP_SleepingBag02_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Tools/BP_SleepingBag02.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_SleepingBag02_C",
+    "Name": "Default__BP_SleepingBag02_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Tools/BP_SleepingBag02.BP_SleepingBag02_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Weight": 2.0,
+      "Type": {
+        "ObjectName": "ItemType'IT_Tools'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Tools.0"
+      },
+      "PlaceableMeshPreview": {
+        "AssetPathName": "/Game/Marketplace/Props/Camping2/Meshes/SM_SleepingBag_01a.SM_SleepingBag_01a",
+        "SubPathString": ""
+      },
+      "PlaceableActorOverride": {
+        "ObjectName": "BlueprintGeneratedClass'BP_SleepingBag02_C'",
+        "ObjectPath": "Vein/Content/Vein/Placeables/BP_SleepingBag02.0"
+      },
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "TableId": "/Game/Vein/Localization/ST_Items.ST_Items",
+        "Key": "SleepingBag",
+        "SourceString": "Sleeping Bag",
+        "LocalizedString": "Sleeping Bag"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/Props/Camping2/Meshes/SM_SleepingBag_Rolled_01a.SM_SleepingBag_Rolled_01a",
+        "SubPathString": ""
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "40CC6C61440FBC08370906B9ACA890FB",
+        "SourceString": "A portable bed.",
+        "LocalizedString": "A portable bed."
+      },
+      "EquippableSetup": {
+        "EquippableStaticMesh": {
+          "AssetPathName": "/Game/Marketplace/Props/Camping2/Meshes/SM_SleepingBag_Rolled_01b.SM_SleepingBag_Rolled_01b",
+          "SubPathString": ""
+        }
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_Cloth_Object_Tier2'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_Cloth_Object_Tier2.0"
+      },
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/Items/Tools/T_Thumb_BP_SleepingBag02_0.T_Thumb_BP_SleepingBag02_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

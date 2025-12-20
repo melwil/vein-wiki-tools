@@ -1,0 +1,41 @@
+{% set construction = obtaining.get("construction") %}
+{% if construction %}
+=== Construction ===
+
+{% if construction.build_requirements %}
+==== Build ====
+{{ model.display_name() }} can be [[Construction|constructed]].
+
+{| class="wikitable"
+! [[Skills]]
+! [[Materials]]
+! [[Tools]]
+|-
+| {{ construction.stat_requirements_str() }}
+| {{ construction.build_requirements_str() }}
+| {{ construction.tools_str() }}
+|}
+{% endif %}
+
+{% if construction.xp_rewards %}
+==== XP rewards ====
+For completing the construction of {{ model.display_name() }} you will be rewarded with skill xp.
+
+{% for xp in construction.xp_rewards %}* {{ xp }}
+{% endfor %}
+{% endif %}
+
+{% if construction.maintenance_costs %}
+==== Maintenance costs ====
+Building {{ model.display_name() }} requires maintenance costs to be supplied in a UC covering it.
+
+{| class="wikitable"
+! [[Materials]]
+|-
+| {{ construction.maintenance_str() }}
+|}
+
+{% endif %}
+
+
+{% endif %}

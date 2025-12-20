@@ -1,0 +1,172 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_Melee_ClawSword_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'Item'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_Melee_ClawSword_C'Default__BP_Melee_ClawSword_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Weapons/Melee/Crafted/BP_Melee_ClawSword.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_Melee_ClawSword_C",
+    "Name": "Default__BP_Melee_ClawSword_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Weapons/Melee/Crafted/BP_Melee_ClawSword.BP_Melee_ClawSword_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Weight": 7.5,
+      "Type": {
+        "ObjectName": "ItemType'IT_Weapons'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Weapons.0"
+      },
+      "TypeIconOverride": {
+        "ObjectName": "Texture2D'T_Bat'",
+        "ObjectPath": "Vein/Content/Vein/UI/Icons/Items/T_Bat.0"
+      },
+      "bDamageable": true,
+      "MinDamagePerUse": 0.3,
+      "MaxDamagePerUse": 0.5,
+      "BreakSound": {
+        "AssetPathName": "/Game/Vein/Audio/Effects/Crafting/SC_MetalBreak.SC_MetalBreak",
+        "SubPathString": ""
+      },
+      "RepairIngredients": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_IronScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_IronScrap.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "Namespace": "",
+        "Key": "0C6F414A43FBE8C9430B7EA8B1C453B8",
+        "SourceString": "Claw Sword",
+        "LocalizedString": "Claw Sword"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/Weapons/PostApoc_Melee_Weapons/meshes/Swords/SM_pa_sword_30.SM_pa_sword_30",
+        "SubPathString": ""
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "285E69C242D9112D341A408A4872DCC6",
+        "SourceString": "Only in the post-apocalypse.",
+        "LocalizedString": "Only in the post-apocalypse."
+      },
+      "bEquippable": true,
+      "EquippableSetup": {
+        "EquippableStaticMesh": {
+          "AssetPathName": "/Game/Marketplace/Weapons/PostApoc_Melee_Weapons/meshes/Swords/SM_pa_sword_30.SM_pa_sword_30",
+          "SubPathString": ""
+        },
+        "RelativeTransform": {
+          "Rotation": {
+            "X": -0.086139984,
+            "Y": 0.01291054,
+            "Z": 0.9957213,
+            "W": 0.030860418,
+            "IsNormalized": true,
+            "Size": 1.0,
+            "SizeSquared": 1.0
+          },
+          "Translation": {
+            "X": -5.6209106,
+            "Y": 4.0233383,
+            "Z": -21.740887
+          }
+        },
+        "RelativeTransform3p": {
+          "Rotation": {
+            "X": -0.086139984,
+            "Y": 0.01291054,
+            "Z": 0.9957213,
+            "W": 0.030860418,
+            "IsNormalized": true,
+            "Size": 1.0,
+            "SizeSquared": 1.0
+          },
+          "Translation": {
+            "X": -5.6209106,
+            "Y": 4.0233383,
+            "Z": -21.740887
+          }
+        },
+        "ArmAnimationSet": {
+          "ObjectName": "MeleeAnimationSet'MAS_BaseballBat'",
+          "ObjectPath": "Vein/Content/Vein/Animation/Montages/Melee/BaseballBat/MAS_BaseballBat.0"
+        },
+        "ThrowDamageType": {
+          "ObjectName": "BlueprintGeneratedClass'DT_Melee_Bladed_C'",
+          "ObjectPath": "Vein/Content/Vein/DamageTypes/DT_Melee_Bladed.0"
+        },
+        "EquippedItemClass": {
+          "ObjectName": "Class'MeleeEquippedItem'",
+          "ObjectPath": "/Script/Vein"
+        }
+      },
+      "ToolSetup": {
+        "Tools": [
+          {
+            "ObjectName": "Tool'T_HeavyCutting'",
+            "ObjectPath": "Vein/Content/Vein/Tools/T_HeavyCutting.0"
+          },
+          {
+            "ObjectName": "Tool'T_CanOpener'",
+            "ObjectPath": "Vein/Content/Vein/Tools/T_CanOpener.0"
+          }
+        ]
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_Metal_Object_Tier2'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_Metal_Object_Tier2.0"
+      },
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "MeleeTime": 0.55,
+      "MeleeDamageMultiplier": 1.75,
+      "SwingSound": {
+        "ObjectName": "SoundCue'SC_SwordWhoosh'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Weapons/Melee/Sword/SC_SwordWhoosh.0"
+      },
+      "OverrideHitSoundTag": {
+        "TagName": "Vein.Audio.OverrideImpactEffects.Sword"
+      },
+      "DamageTypeClass": {
+        "ObjectName": "BlueprintGeneratedClass'DT_Melee_Bladed_C'",
+        "ObjectPath": "Vein/Content/Vein/DamageTypes/DT_Melee_Bladed.0"
+      },
+      "MeleeTiredness": 15.0,
+      "Tags": [
+        {
+          "ObjectName": "TagAsset'TAG_Metal'",
+          "ObjectPath": "Vein/Content/Vein/TagAssets/TAG_Metal.0"
+        }
+      ],
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/Items/Weapons/Melee/Crafted/T_Thumb_BP_Melee_ClawSword_0.T_Thumb_BP_Melee_ClawSword_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

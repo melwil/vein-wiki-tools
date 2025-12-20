@@ -1,0 +1,41 @@
+[
+  {
+    "Type": "FluidDefinition",
+    "Name": "FL_Beer",
+    "Class": "UScriptClass'FluidDefinition'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Name": {
+        "Namespace": "",
+        "Key": "278E32104DBAA3256AA6D5AADEBC968F",
+        "SourceString": "Beer",
+        "LocalizedString": "Beer"
+      },
+      "bDecays": false,
+      "CoolingSpeed": 1.0,
+      "ThirstSatisfactionPerMilliliter": -0.1,
+      "ConditionsOnDrink": {
+        "ObjectName": "FoodConditionSet'FCS_Beer'",
+        "ObjectPath": "Vein/Content/Vein/Items/Consumables/Conditions/FCS_Beer.0"
+      },
+      "ConditionsOnInject": {
+        "ObjectName": "FoodConditionSet'FCS_BloodPoisoning'",
+        "ObjectPath": "Vein/Content/Vein/Items/Consumables/Conditions/FCS_BloodPoisoning.0"
+      },
+      "SmellText": {
+        "Namespace": "",
+        "Key": "BCBEFFA74A837AC1B8A79BB384406C76",
+        "SourceString": "Smells like beer.",
+        "LocalizedString": "Smells like beer."
+      },
+      "FreezingPoint": -2.0,
+      "Density": 1.01,
+      "StandingFluidMaterial": {
+        "AssetPathName": "/Game/Vein/MaterialLibrary/Fluids/MI_Standing_Beer.MI_Standing_Beer",
+        "SubPathString": ""
+      },
+      "ScentStrength": -0.1,
+      "DetergentMultiplier": -1.0
+    }
+  }
+]

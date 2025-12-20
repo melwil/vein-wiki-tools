@@ -1,0 +1,39 @@
+[
+  {
+    "Type": "FluidDefinition",
+    "Name": "FL_ColdMedicine",
+    "Class": "UScriptClass'FluidDefinition'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Name": {
+        "Namespace": "",
+        "Key": "0FEFCE4348DBB0D569ED76A83D102D24",
+        "SourceString": "Cold Medicine",
+        "LocalizedString": "Cold Medicine"
+      },
+      "bDecaysOverTime": true,
+      "DaysToDecay": 365.0,
+      "ConditionsOnDrink": {
+        "ObjectName": "FoodConditionSet'FCS_ColdMedicine'",
+        "ObjectPath": "Vein/Content/Vein/Items/Consumables/Conditions/FCS_ColdMedicine.0"
+      },
+      "ConditionsOnInject": {
+        "ObjectName": "FoodConditionSet'FCS_BloodPoisoning'",
+        "ObjectPath": "Vein/Content/Vein/Items/Consumables/Conditions/FCS_BloodPoisoning.0"
+      },
+      "SmellText": {
+        "Namespace": "",
+        "Key": "E2DD1EC84D0CF660A7B5338778979984",
+        "SourceString": "Smells medicinal.",
+        "LocalizedString": "Smells medicinal."
+      },
+      "BoilingPoint": 111.0,
+      "Density": 1.1,
+      "StandingFluidMaterial": {
+        "AssetPathName": "/Game/Vein/MaterialLibrary/Fluids/MI_Standing_ColdMedicine.MI_Standing_ColdMedicine",
+        "SubPathString": ""
+      },
+      "DetergentMultiplier": -1.0
+    }
+  }
+]

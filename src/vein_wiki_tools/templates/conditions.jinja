@@ -1,0 +1,26 @@
+{% set conditions = usage.get("conditions") %}
+{% if conditions %}
+
+=== Conditions ===
+{{ model.display_name() }} will apply conditions when consumed.
+
+{% if conditions.eat %}
+{% set fcs = conditions.eat[0] %}
+==== When eaten ====
+{% include "food_condition_set.jinja" %}
+{% endif %}
+
+{% if conditions.drink %}
+{% set fcs = conditions.drink[0] %}
+==== When drunk ====
+{% include "food_condition_set.jinja" %}
+{% endif %}
+
+{% if conditions.inject %}
+{% set fcs = conditions.inject[0] %}
+==== When injected ====
+{% include "food_condition_set.jinja" %}
+{% endif %}
+
+
+{% endif %}

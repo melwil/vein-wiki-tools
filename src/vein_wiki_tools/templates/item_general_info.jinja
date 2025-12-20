@@ -1,23 +1,32 @@
 {% if obtaining %}
 == Obtaining ==
+{% include "construction.jinja" %}
+{% include "scavenging.jinja" %}
+
 {# include "cooking.jinja" #}
 {# include "crafting.jinja" #}
 {# include "dismantle.jinja" #}
 {# include "static_spawns.jinja" #}
-{# include "scavenging.jinja" #}
-{% endif%}
-
+{% endif %}
 
 {% if usage %}
 == Usage ==
-{# include "repair.jinja" #}
+{% include "requirements.jinja" %} 
+{% include "conditions.jinja" %}
+{% include "dismantle_into.jinja" %}
+{% include "repair.jinja" %}
+
 {# include "cooking.jinja" #} 
 {# include "crafting.jinja" #}
-{% include "dismantle_into.jinja" %}
 {# include "fuel.jinja" #}
 {# include "consumption.jinja" #}
 {# include "car_modification.jinja" #}
 {# include "weapon_modification.jinja" #}
 {# include "building.jinja" #}
-{% endif%}
+{% endif %}
+
+{% include "variants.jinja" %}
+
+
+
 {% raw %}{{ NavBarItems }}{% endraw %}

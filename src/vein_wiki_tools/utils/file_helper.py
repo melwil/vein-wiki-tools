@@ -17,8 +17,7 @@ def get_full_file_path(project_file_path: str) -> str:
 
 
 def get_import_path(filename: str | None = None) -> Path:
-    """
-    Get the import path for a file relative to the "src/vein_wiki_tools" as base folder
+    """Get the import path for a file relative to the "src/vein_wiki_tools" as base folder.
 
     Equals <git_project_root>/import_files/example-import-file.txt
     """

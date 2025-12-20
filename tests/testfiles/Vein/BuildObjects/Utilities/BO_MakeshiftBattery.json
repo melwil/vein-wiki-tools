@@ -1,0 +1,121 @@
+[
+  {
+    "Type": "BuildObject",
+    "Name": "BO_MakeshiftBattery",
+    "Class": "UScriptClass'BuildObject'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "Name": {
+        "Namespace": "",
+        "Key": "E6F9D9D843FD995E3C467C8A55006936",
+        "SourceString": "Makeshift Battery",
+        "LocalizedString": "Makeshift Battery"
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "3920EB764F206C2D1B12A6A515F6A59A",
+        "SourceString": "A makeshift EPS system that stores and dispenses electricity.",
+        "LocalizedString": "A makeshift EPS system that stores and dispenses electricity."
+      },
+      "SortOrder": 1.0,
+      "BuildRequirements": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_CarBattery_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Car/BP_CarBattery.0"
+          },
+          "Quantity": 3
+        },
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_ScrapMetalPipe_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_ScrapMetalPipe.0"
+          },
+          "Quantity": 4
+        },
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_ScrapMetalSheetSmall_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/BP_ScrapMetalSheetSmall.0"
+          },
+          "Quantity": 4
+        },
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_Components_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Crafted/00_Parts/BP_Components.0"
+          },
+          "Quantity": 8
+        }
+      ],
+      "ToolObjectRequirements": [
+        {
+          "ObjectName": "Tool'T_PoweredDriver'",
+          "ObjectPath": "Vein/Content/Vein/Tools/T_PoweredDriver.0"
+        },
+        {
+          "ObjectName": "Tool'T_Soldering'",
+          "ObjectPath": "Vein/Content/Vein/Tools/T_Soldering.0"
+        }
+      ],
+      "MaintenanceCost": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_ElectricalScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_ElectricalScrap.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "BuildObjectTier": {
+        "ObjectName": "BuildObjectTier'BOT_Electricity'",
+        "ObjectPath": "Vein/Content/Vein/BuildObjectTiers/BOT_Electricity.0"
+      },
+      "StatRequirements": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Construction.ST_Construction_C'",
+          "Value": 60
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Mechanical.ST_Mechanical_C'",
+          "Value": 50
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Electrical.ST_Electrical_C'",
+          "Value": 15
+        }
+      ],
+      "BuildObjectCategory": {
+        "ObjectName": "BuildObjectCategory'BOC_Utilities'",
+        "ObjectPath": "Vein/Content/Vein/BuildObjectCategories/BOC_Utilities.0"
+      },
+      "ResultingActor": {
+        "ObjectName": "BlueprintGeneratedClass'BP_MakeshiftBattery_C'",
+        "ObjectPath": "Vein/Content/Vein/Electricity/Batteries/BP_MakeshiftBattery.0"
+      },
+      "BuildSound": {
+        "ObjectName": "SoundCue'SC_CraftMetal'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Crafting/SC_CraftMetal.0"
+      },
+      "InitialRotationOffset": 180.0,
+      "XPOnBuild": [
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Construction.ST_Construction_C'",
+          "Value": 2793.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Mechanical.ST_Mechanical_C'",
+          "Value": 2793.0
+        },
+        {
+          "Key": "BlueprintGeneratedClass'Vein/Content/Vein/Stats/ST_Electrical.ST_Electrical_C'",
+          "Value": 2793.0
+        }
+      ],
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/BuildObjects/Utilities/Meshes/T_Thumb_SM_Electricity_MakeshiftEmergencyPowerSupply_0.T_Thumb_SM_Electricity_MakeshiftEmergencyPowerSupply_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]

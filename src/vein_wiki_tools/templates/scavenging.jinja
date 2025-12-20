@@ -1,0 +1,30 @@
+{% set scavenging = obtaining.get("scavenging") %}
+{% if scavenging %}
+=== Scavenging ===
+{{ model.display_name() }} can be [[Scavenging|scavenged]] from containers and shelves.
+
+{% if scavenging.fluid_contents %}
+While scavenging {{ model.display_name() }} can be found containing fluids.
+{| class="wikitable"
+! Amount
+! Contained Fluid
+{% for contains in scavenging.fluid_contents %}|-
+| {{ contains.content_span_str() }} 
+| {{ contains.fluid_type }}
+{% endfor %}|}
+{% endif %}
+
+{% if scavenging.fluids_contained %}
+While scavenging {{ model.display_name() }} can be found in various containers.
+{| class="wikitable"
+! Container
+! Amount
+! Contained Fluid
+{% for contained in scavenging.fluids_contained %}|-
+| {{ contained.container }}
+| {{ contained.content_span_str() }} 
+| {{ contained.fluid_type.text }}
+{% endfor %}|}
+{% endif %}
+
+{% endif %}

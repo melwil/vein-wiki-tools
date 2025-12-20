@@ -1,11 +1,12 @@
-{% if subject.repair_ingredients %}
+{% set repair = usage.get("repair") %}
+{% if repair %}
 === Repair ===
-{{ subject.name }} can be [[Repair|repaired]] using the following ingredients:
+{{ model.display_name() }} can be [[Repair|repaired]] on a [[Repair Workbench]].
 {| class="wikitable"
-! Item
-! Quantity
-{% for result in subject.repair_ingredients %}|-
-| {{ result.name }}
-| {{ result.quantity }}
-{% endfor %}|}
+! Tool
+! Item lists
+|-
+| {{ repair.tools_str() }}
+| {{ repair.materials_str() }}
+|}
 {% endif %}

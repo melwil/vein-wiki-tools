@@ -6,7 +6,7 @@ authors = [
     {name = "Håvard Slettvold",email = "havard@slettvold.net"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
     "pywikibot (>=10.7.0,<11.0.0)",
     "pydantic (>=2.12.4,<3.0.0)",
@@ -16,7 +16,10 @@ dependencies = [
     "types-aiofiles (>=25.1.0.20251011,<26.0.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
     "pytest-icdiff (>=0.9,<0.10)",
-    "pytest-mock (>=3.15.1,<4.0.0)"
+    "pytest-mock (>=3.15.1,<4.0.0)",
+    "mypy (>=1.19.0,<2.0.0)",
+    "ruff (>=0.14.9,<0.15.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
 ]
 
 [tool.poetry]
@@ -26,9 +29,19 @@ packages = [{include = "vein_wiki_tools", from = "src"}]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
-target-version = ["py311"]
-line-length = 200
+[tool.ruff]
+line-length = 140
+indent-width = 4
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = []
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
 
 [tool.isort]
 # The following settings resolve conflicts between isort and black.
@@ -38,19 +51,29 @@ include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
 ensure_newline_before_comments = true
-line_length = 200                     # Should be the same as black's default line-length
+line_length = 140                     # Should be the same as ruff's line-length
 
 [tool.pytest.ini_options]
 testpaths = ["tests/"]
 addopts = "--durations=12 -p no:ddtrace"
 asyncio_mode = "auto"                    # See pytest-asyncio plug-in
 
+[tool.mypy]
+python_version = "3.13"
+strict_optional = true
+ignore_missing_imports = true
+follow_imports = "normal"
+allow_untyped_globals = true
+plugins = ['pydantic.mypy']
+
+[tool.pyright]
+reportCallIssue = false
+
 [dependency-groups]
 dev = [
     "pytest (>=8.4.2,<9.0.0)",
     "isort (>=6.1.0,<7.0.0)",
     "flake8 (>=7.3.0,<8.0.0)",
-    "black (>=25.9.0,<26.0.0)",
     "pytest-asyncio (>=1.2.0,<2.0.0)",
     "mypy (>=1.18.2,<2.0.0)"
 ]

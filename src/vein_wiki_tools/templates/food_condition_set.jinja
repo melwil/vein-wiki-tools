@@ -1,0 +1,8 @@
+{% if fcs.blood_sugar_impact %}* Blood sugar impact: {{ fcs.blood_sugar_impact }}{% endif %}
+{% if fcs.addiction %}* Addictions
+{% for addiction in fcs.addiction %}** {{ addiction }}
+{% endfor %}{% endif %}{% if fcs.conditions %}* Conditions
+{% for condition in fcs.conditions %}** {{ condition }}
+{% endfor %}{% endif %}{% if fcs.xp_gain %}* XP gains
+{% for xp in fcs.xp_gain %}** {{ xp }}
+{% endfor %}{% endif %}

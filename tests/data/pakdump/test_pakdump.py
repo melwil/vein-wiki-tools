@@ -1,9 +1,21 @@
-from vein_wiki_tools.clients.pakdump.ammo import UEBulletType
+from vein_wiki_tools.clients.pakdump.consumables import UEFluidDefinition
+from vein_wiki_tools.clients.pakdump.firearms import UEBulletType
 from vein_wiki_tools.clients.pakdump.models import UEBlueprintGeneratedClass, UEItemType, UEModel
 from vein_wiki_tools.clients.pakdump.services import get_related_models
 from vein_wiki_tools.clients.pakdump.tools import UETool
 from vein_wiki_tools.data.models import Graph
-from vein_wiki_tools.data.pakdump.pakdump import PakdumpData, import_ammo, import_bullet_types, import_firearms, import_itemtypes, import_magazines, import_tool_groups, pakdump_graph
+from vein_wiki_tools.data.pakdump.pakdump import (
+    PakdumpData,
+    import_all,
+    import_ammo,
+    import_bullet_types,
+    import_firearms,
+    import_fluids,
+    import_itemtypes,
+    import_magazines,
+    import_tool_groups,
+    pakdump_graph,
+)
 from vein_wiki_tools.models.common import LinkType
 
 
@@ -44,6 +56,17 @@ async def test_tool_groups():
     assert tool_group_node_count == 30
 
 
+async def test_import_fluids():
+    data = create_pakdump_data()
+    await import_fluids(data)
+    fluid_node_count = 0
+    for node in data.graph.nodes.values():
+        if isinstance(node.ue_model, UEFluidDefinition):
+            assert node.ue_model.name.startswith("FL_")
+            fluid_node_count += 1
+    assert fluid_node_count == 33
+
+
 async def test_import_bullet_types_from_pakdump():
     data = create_pakdump_data()
     await import_bullet_types(data)
@@ -73,9 +96,10 @@ async def test_import_ammo_from_pakdump():
 
 async def test_import_ammo_from_pakdump_with_all_edges():
     data = create_pakdump_data()
-    await import_itemtypes(data)
-    await import_bullet_types(data)
-    await import_ammo(data)
+    # await import_itemtypes(data)
+    # await import_bullet_types(data)
+    # await import_ammo(data)
+    await import_all(data)
     assert data.graph.root_node is not None
     itemtype_ammo_node = data.graph.get_node("ItemType'IT_Ammo'", ue_model_type=UEItemType)
     assert itemtype_ammo_node is not None
@@ -84,8 +108,9 @@ async def test_import_ammo_from_pakdump_with_all_edges():
     for linktype, node in itemtype_ammo_node.neighbours:
         if node.ue_model.name.startswith("BP_Ammo_"):
             if linktype == LinkType.HAS_ITEM_TYPE:
+                print(node.ue_model.name)
                 assert isinstance(node.ue_model, UEBlueprintGeneratedClass)
-                assert node.ue_model.template == "ammo"
+                assert node.ue_model.model_info.sub_type == "bullet"
                 ammo_nodes.append(node)
     assert len(ammo_nodes) == 13
     bullet_type_node_names = set()
@@ -139,7 +164,7 @@ async def test_import_firearms_from_pakdump_with_all_edges():
         if node.ue_model.name.startswith("BP_Firearm_"):
             if linktype == LinkType.HAS_ITEM_TYPE:
                 assert isinstance(node.ue_model, UEBlueprintGeneratedClass)
-                assert node.ue_model.template == "firearm"
+                assert node.ue_model.model_info.sub_type == "firearm"
                 weapon_nodes.append(node)
     assert len(weapon_nodes) == 20
 
@@ -151,3 +176,19 @@ async def test_import_firearms_from_pakdump_with_all_edges():
             if magazine_node.ue_model.name.startswith("BP_Magazine_"):
                 magazine_node_count += 1
     assert magazine_node_count == 10
+
+
+async def test_import_drinks_with_fluids():
+    data = create_pakdump_data()
+    await import_all(data)
+    wine_node = data.graph.get_node("BlueprintGeneratedClass'BP_WineBottle_C'", ue_model_type=UEBlueprintGeneratedClass)
+    assert wine_node is not None
+    for linktype, node in wine_node.edges:
+        if linktype == LinkType.HAS_FLUID:
+            assert node.ue_model.get_object_name() == "FluidDefinition'FL_Wine'"
+
+
+async def test_import_all():
+    data = create_pakdump_data()
+    await import_all(data)
+    assert len(data.graph.nodes) >= 255

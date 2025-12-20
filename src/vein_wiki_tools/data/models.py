@@ -135,14 +135,14 @@ class Graph:
         return node
 
     def delete_node(self, node: Node) -> None:
-        self.deleted_nodes[node.ue_model.get_interface_name()] = node
+        self.deleted_nodes[node.ue_model.get_object_name()] = node
         # Delete links up from this node (neighbours)
         for link_type, edge_node in node.edges:
             edge_node.neighbours.remove((link_type, node))
         # Delete links down from this node (edges)
         for link_type, neighbour_node in node.neighbours:
             neighbour_node.edges.remove((link_type, node))
-        del self.nodes[node.ue_model.get_interface_name()]
+        del self.nodes[node.ue_model.get_object_name()]
 
     def save(self) -> list:
         ue_models = list()

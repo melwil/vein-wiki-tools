@@ -1,7 +1,9 @@
 from typing import Type
 
-from vein_wiki_tools.clients.pakdump.ammo import *
+from vein_wiki_tools.clients.pakdump.build import *  # noqa
+from vein_wiki_tools.clients.pakdump.firearms import *  # noqa
 from vein_wiki_tools.clients.pakdump.models import UEModel
+from vein_wiki_tools.clients.pakdump.recipes import *  # noqa
 
 
 def get_subclass_type(type_name: str | None) -> Type[UEModel] | None:

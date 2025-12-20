@@ -1,10 +1,10 @@
 {% raw %}{{Infobox Item{% endraw %}
 |title={{ infobox.title }}
 |image={{ infobox.image }}
-|description={{ infobox.description }}
-|weight={{ infobox.weight }}
-|used-as=
+|description={{ infobox.description or "" }}
+|weight={{ infobox.weight or "" }}
+|used-as={{ infobox.used_as or "" }}
 |stackable={{ infobox.stackable_str() }}
 |renewable={{ infobox.renewable_str() }}
-|itemID={{ infobox.item_id }}
+|itemID={{ infobox.item_id or "" }}
 {% raw %}}}{% endraw %}

@@ -1,0 +1,274 @@
+[
+  {
+    "Type": "BlueprintGeneratedClass",
+    "Name": "BP_Firearm_Flock17_C",
+    "Class": "UScriptClass'BlueprintGeneratedClass'",
+    "Flags": "RF_Public | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "SuperStruct": {
+      "ObjectName": "Class'FirearmItem'",
+      "ObjectPath": "/Script/Vein"
+    },
+    "ClassFlags": "CLASS_ReplicationDataIsSetUp | CLASS_CompiledFromBlueprint | CLASS_HasInstancedReference",
+    "ClassWithin": {
+      "ObjectName": "Class'Object'",
+      "ObjectPath": "/Script/CoreUObject"
+    },
+    "ClassConfigName": "Engine",
+    "bCooked": true,
+    "ClassDefaultObject": {
+      "ObjectName": "BP_Firearm_Flock17_C'Default__BP_Firearm_Flock17_C'",
+      "ObjectPath": "Vein/Content/Vein/Items/Weapons/Ranged/BP_Firearm_Flock17.1"
+    },
+    "EditorTags": {
+      "BlueprintType": "BPTYPE_Normal"
+    }
+  },
+  {
+    "Type": "BP_Firearm_Flock17_C",
+    "Name": "Default__BP_Firearm_Flock17_C",
+    "Class": "BlueprintGeneratedClass'Vein/Content/Vein/Items/Weapons/Ranged/BP_Firearm_Flock17.BP_Firearm_Flock17_C'",
+    "Flags": "RF_Public | RF_Transactional | RF_ClassDefaultObject | RF_ArchetypeObject | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "FireSound": {
+        "ObjectName": "SoundCue'SC_Flock17_Fire'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Weapons/Firearms/Flock17/SC_Flock17_Fire.0"
+      },
+      "FireSoundEmpty": {
+        "ObjectName": "SoundCue'SC_Pistol_FireEmpty'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Weapons/Cameron/Bolt_Action/SC_Pistol_FireEmpty.0"
+      },
+      "bUsesMagazines": true,
+      "MagazineItems": [
+        {
+          "ObjectName": "BlueprintGeneratedClass'BP_Magazine_Flock17_C'",
+          "ObjectPath": "Vein/Content/Vein/Items/Ammo/BP_Magazine_Flock17.0"
+        },
+        {
+          "ObjectName": "BlueprintGeneratedClass'BP_Magazine_Flock17_Extended_C'",
+          "ObjectPath": "Vein/Content/Vein/Items/Ammo/BP_Magazine_Flock17_Extended.0"
+        }
+      ],
+      "TracerEffect": {
+        "ObjectName": "NiagaraSystem'NS_Tracer1'",
+        "ObjectPath": "Vein/Content/Vein/Effects/Weapons/NS_Tracer1.6"
+      },
+      "MuzzleEffect": {
+        "ObjectName": "NiagaraSystem'NS_Muzzleflash1'",
+        "ObjectPath": "Vein/Content/Vein/Effects/Weapons/NS_Muzzleflash1.8"
+      },
+      "ShellEffect": {
+        "ObjectName": "NiagaraSystem'NS_ShellEjection2'",
+        "ObjectPath": "Vein/Content/Vein/Effects/Weapons/NS_ShellEjection2.14"
+      },
+      "RPM": 800.0,
+      "NPCRPM": 110.0,
+      "AmmoCapacity": 17,
+      "ArmFireMontage": {
+        "ObjectName": "AnimMontage'AM_Arms_Pistol_Shoot'",
+        "ObjectPath": "Vein/Content/Vein/Animation/Montages/Firearms/AM_Arms_Pistol_Shoot.0"
+      },
+      "CharacterFireMontage": {
+        "ObjectName": "AnimMontage'AM_Char_Rifle_Fire'",
+        "ObjectPath": "Vein/Content/Vein/Animation/Montages/Firearms/AM_Char_Rifle_Fire.0"
+      },
+      "ArmReloadMontage": {
+        "ObjectName": "AnimMontage'AM_Arms_Pistol_Reload_Flock17'",
+        "ObjectPath": "Vein/Content/Vein/Animation/Montages/Firearms/AM_Arms_Pistol_Reload_Flock17.0"
+      },
+      "CharacterReloadMontage": {
+        "ObjectName": "AnimMontage'AM_Char_Pistol_Reload'",
+        "ObjectPath": "Vein/Content/Vein/Animation/Montages/Firearms/AM_Char_Pistol_Reload.0"
+      },
+      "BulletDamagePerks": [
+        {
+          "Key": "StatPerk'Vein/Content/Vein/Stats/Perks/WeaponHandling/STP_WeaponHandling_50_OneHanded.STP_WeaponHandling_50_OneHanded'",
+          "Value": 1.25
+        }
+      ],
+      "ReloadDuration": 1.96,
+      "FireCameraShake": {
+        "ObjectName": "BlueprintGeneratedClass'CS_Firearm_Pistol_C'",
+        "ObjectPath": "Vein/Content/Vein/Effects/Weapons/CS_Firearm_Pistol.0"
+      },
+      "FireCameraPunchVelocityMin": {
+        "X": 0.0,
+        "Y": 1.0,
+        "Z": 0.0
+      },
+      "FireCameraPunchVelocityMax": {
+        "X": 0.0,
+        "Y": 2.0,
+        "Z": 0.0
+      },
+      "AISoundRadius": 8000.0,
+      "BrokenSound": {
+        "ObjectName": "SoundCue'SC_BrokenTriggerPull'",
+        "ObjectPath": "Vein/Content/Vein/Audio/Effects/Weapons/Firearms/SC_BrokenTriggerPull.0"
+      },
+      "ADSTransform": {
+        "Rotation": {
+          "X": 0.005671804,
+          "Y": -7.4247975E-05,
+          "Z": -0.013089385,
+          "W": 0.99989825,
+          "IsNormalized": true,
+          "Size": 1.0,
+          "SizeSquared": 1.0
+        },
+        "Translation": {
+          "X": 6.6,
+          "Y": 0.0,
+          "Z": 3.5860286
+        }
+      },
+      "ADSItemTransform": {
+        "Translation": {
+          "X": 0.0,
+          "Y": -9.0,
+          "Z": 4.5
+        }
+      },
+      "ValidAttachments": [
+        {
+          "ObjectName": "BlueprintGeneratedClass'BP_Suppressor_Pistol_C'",
+          "ObjectPath": "Vein/Content/Vein/Items/Weapons/Attachments/BP_Suppressor_Pistol.0"
+        }
+      ],
+      "Weight": 1.1,
+      "Type": {
+        "ObjectName": "ItemType'IT_Weapons'",
+        "ObjectPath": "Vein/Content/Vein/ItemTypes/IT_Weapons.0"
+      },
+      "bDamageable": true,
+      "MinDamagePerUse": 0.3,
+      "MaxDamagePerUse": 0.4,
+      "bKeepWhenBroken": true,
+      "RepairIngredients": [
+        {
+          "Item": {
+            "ObjectName": "BlueprintGeneratedClass'BP_IronScrap_C'",
+            "ObjectPath": "Vein/Content/Vein/Items/Crafting/Scrap/BP_IronScrap.0"
+          },
+          "Quantity": 1
+        }
+      ],
+      "PlaceableRestriction": "EBuildObjectRestriction::GroundOrWall",
+      "bOrientPlacementToSurfaceRotation": true,
+      "PlacementYawAxis": "EAxis::Y",
+      "PlaceableYaw": -90.0,
+      "ScentRadiusSqr": 160000.0,
+      "Name": {
+        "Namespace": "",
+        "Key": "00BACD2F4E22BCF5E0E15DA2CADB874D",
+        "SourceString": "Wolfram 17",
+        "LocalizedString": "Wolfram 17"
+      },
+      "Mesh": {
+        "AssetPathName": "/Game/Marketplace/CGTrader/Glock17/SM_Glock17.SM_Glock17",
+        "SubPathString": ""
+      },
+      "ShortName": {
+        "Namespace": "",
+        "Key": "B4E0E61242574BAE2439808850BCCA6B",
+        "SourceString": "W17",
+        "LocalizedString": "W17"
+      },
+      "Description": {
+        "Namespace": "",
+        "Key": "A5C080134B1B799DC308E29773EB194C",
+        "SourceString": "Beautiful and blocky.",
+        "LocalizedString": "Beautiful and blocky."
+      },
+      "PickupSound": {
+        "AssetPathName": "/Game/Vein/Audio/Effects/Weapons/Firearms/SC_PistolDraw.SC_PistolDraw",
+        "SubPathString": ""
+      },
+      "bEquippable": true,
+      "EquippableSetup": {
+        "EquippableStaticMesh": {
+          "AssetPathName": "/Game/Marketplace/CGTrader/Glock17/SM_Glock17.SM_Glock17",
+          "SubPathString": ""
+        },
+        "RelativeTransform": {
+          "Rotation": {
+            "X": -0.205587,
+            "Y": -0.041163,
+            "Z": 0.969223,
+            "W": 0.129021,
+            "IsNormalized": true,
+            "Size": 1.0,
+            "SizeSquared": 1.0000001
+          },
+          "Translation": {
+            "X": -8.184983,
+            "Y": 4.228338,
+            "Z": 0.703749
+          }
+        },
+        "ArmRelativeTransform": {
+          "Translation": {
+            "X": -4.554733,
+            "Y": -2.2285843,
+            "Z": 7.030293
+          }
+        },
+        "RelativeTransform3p": {
+          "Rotation": {
+            "X": 0.108757,
+            "Y": -0.080181,
+            "Z": -0.967004,
+            "W": 0.215979,
+            "IsNormalized": true,
+            "Size": 1.0000004,
+            "SizeSquared": 1.0000007
+          },
+          "Translation": {
+            "X": -6.568073,
+            "Y": 6.639319,
+            "Z": -1.126404
+          }
+        },
+        "ArmAnimationSet": {
+          "ObjectName": "MeleeAnimationSet'MAS_Pistol'",
+          "ObjectPath": "Vein/Content/Vein/Animation/Equipment/Weapons/MAS_Pistol.0"
+        },
+        "ArmPullbackTransform": {
+          "Rotation": {
+            "X": 0.5,
+            "Y": 0.0,
+            "Z": 0.0,
+            "W": 0.866025,
+            "IsNormalized": true,
+            "Size": 0.9999996,
+            "SizeSquared": 0.9999992
+          },
+          "Translation": {
+            "X": 0.0,
+            "Y": 50.0,
+            "Z": -10.0
+          }
+        },
+        "ItemBackpackType": "EItemBackpackType::Sidearm"
+      },
+      "DismantlingResults": {
+        "ObjectName": "ItemSpawnlist'ILC_MachineAluminum_Object_Tier2'",
+        "ObjectPath": "Vein/Content/Vein/Spawnlists/ItemListCollections/02Dismantling/ILC_MachineAluminum_Object_Tier2.0"
+      },
+      "ExplosionEffectRotation": {
+        "Pitch": 0.0,
+        "Yaw": 0.0,
+        "Roll": 1.0
+      },
+      "Tags": [
+        {
+          "ObjectName": "TagAsset'TAG_Metal'",
+          "ObjectPath": "Vein/Content/Vein/TagAssets/TAG_Metal.0"
+        }
+      ],
+      "Thumbnail": {
+        "AssetPathName": "/Game/Vein/Items/Weapons/Ranged/T_Thumb_BP_Firearm_Flock17_0.T_Thumb_BP_Firearm_Flock17_0",
+        "SubPathString": ""
+      }
+    }
+  }
+]
