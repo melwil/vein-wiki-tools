@@ -1,0 +1,32 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.cwd": "${workspaceFolder}",
+  "[python]": {
+    "editor.codeActionsOnSave": {
+       "source.organizeImports.ruff": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+  },
+  "flake8.importStrategy": "fromEnvironment",
+  "flake8.args": [
+    "--config=setup.cfg",
+  ],
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "isort.args": [
+    "--settings-file",
+    "pyproject.toml",
+    "--profile",
+    "black"
+  ],
+  "python.testing.pytestArgs": [
+    "--capture=no",
+    "--log-cli-level=DEBUG",
+    "tests",
+  ],
+  "ruff.importStrategy": "fromEnvironment",
+}
