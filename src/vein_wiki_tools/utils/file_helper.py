@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
+from vein_wiki_tools.settings import settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 
 def get_vein_root() -> Path:
-    VEIN_PAK_DUMP_ROOT = Path("/mnt/c/Users/havard/Downloads/Vein")
-    return VEIN_PAK_DUMP_ROOT
+    return settings.vein_pak_dump_root
 
 
 def get_full_file_path(project_file_path: str) -> str:

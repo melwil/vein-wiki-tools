@@ -2,9 +2,7 @@
 name = "vein-wiki-tools"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Håvard Slettvold",email = "havard@slettvold.net"}
-]
+authors = [{ name = "Håvard Slettvold", email = "havard@slettvold.net" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -20,10 +18,11 @@ dependencies = [
     "mypy (>=1.19.0,<2.0.0)",
     "ruff (>=0.14.9,<0.15.0)",
     "tqdm (>=4.67.1,<5.0.0)",
+    "pydantic-settings (>=2.12.0,<3.0.0)",
 ]
 
 [tool.poetry]
-packages = [{include = "vein_wiki_tools", from = "src"}]
+packages = [{ include = "vein_wiki_tools", from = "src" }]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -75,5 +74,5 @@ dev = [
     "isort (>=6.1.0,<7.0.0)",
     "flake8 (>=7.3.0,<8.0.0)",
     "pytest-asyncio (>=1.2.0,<2.0.0)",
-    "mypy (>=1.18.2,<2.0.0)"
+    "mypy (>=1.18.2,<2.0.0)",
 ]

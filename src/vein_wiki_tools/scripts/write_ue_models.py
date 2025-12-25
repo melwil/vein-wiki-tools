@@ -4,7 +4,11 @@ from pathlib import Path
 import tqdm
 
 from vein_wiki_tools.clients.file import create_page as f_create_page
-from vein_wiki_tools.clients.pakdump.services import get_categories, get_ue_model_by_path, prep_context_for_ue_model
+from vein_wiki_tools.clients.pakdump.services import (
+    get_categories,
+    get_ue_model_by_path,
+    prep_context_for_ue_model,
+)
 from vein_wiki_tools.data.models import Node
 from vein_wiki_tools.data.pakdump.pakdump import pakdump_graph
 from vein_wiki_tools.services.template import render
@@ -32,7 +36,9 @@ async def main() -> None:
         logger.info(f"Filtering, at: {node.ue_model.display_name()}")
         context = await prep_context_for_ue_model(node=node, graph=graph)
         if not context["infobox"].infobox_template:
-            logger.warning(f"Missing infobox template for {node.ue_model.display_name()}")
+            logger.warning(
+                f"Missing infobox template for {node.ue_model.display_name()}"
+            )
             continue
         models_to_write.append((node, context))
 
@@ -40,14 +46,18 @@ async def main() -> None:
     for n, c in tqdm.tqdm(models_to_write, desc="Writing .."):
         ue_model = n.ue_model
         logger.info(f"Rendering {ue_model.display_name()}")
-        content = await render(template=f"{ue_model.model_info.template}.jinja", context=c)
+        content = await render(
+            template=f"{ue_model.model_info.template}.jinja", context=c
+        )
         subfolder = ue_model.model_info.template
         if ue_model.model_info.super_type is not None:
             subfolder = ue_model.model_info.super_type
         if ue_model.model_info.sub_type is not None:
             subfolder = ue_model.model_info.sub_type
         await f_create_page(
-            path=LOCAL_WIKI_PATH / subfolder / f"{ue_model.model_info.console_name}.wiki",
+            path=LOCAL_WIKI_PATH
+            / subfolder
+            / f"{ue_model.model_info.console_name}.wiki",
             text=content,
             summary=f"Creating page for UE model: {ue_model.get_object_name()}",
         )

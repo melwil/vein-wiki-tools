@@ -17,14 +17,6 @@
 |}
 {% endif %}
 
-{% if construction.xp_rewards %}
-==== XP rewards ====
-For completing the construction of {{ model.display_name() }} you will be rewarded with skill xp.
-
-{% for xp in construction.xp_rewards %}* {{ xp }}
-{% endfor %}
-{% endif %}
-
 {% if construction.maintenance_costs %}
 ==== Maintenance costs ====
 Building {{ model.display_name() }} requires maintenance costs to be supplied in a UC covering it.
@@ -34,8 +26,14 @@ Building {{ model.display_name() }} requires maintenance costs to be supplied in
 |-
 | {{ construction.maintenance_str() }}
 |}
-
 {% endif %}
 
+{% if construction.xp_rewards %}
+==== XP rewards ====
+For completing the construction of {{ model.display_name() }} you will be rewarded with skill xp.
+
+{% for xp in construction.xp_rewards %}* {{ xp }}
+{% endfor %}
+{% endif %}
 
 {% endif %}

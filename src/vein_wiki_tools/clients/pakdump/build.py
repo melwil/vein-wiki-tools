@@ -2,17 +2,28 @@ import re
 
 from pydantic import Field
 
-from vein_wiki_tools.clients.pakdump.models import UEBaseModel, UECultureInvariantString, UELocalizedString, UEModel, UEModelInfo, UEQuantityModel, UEReference, UEStrKeyFloatValuePair
+from vein_wiki_tools.clients.pakdump.models import (
+    UEBaseModel,
+    UECultureInvariantString,
+    UELocalizedString,
+    UEModel,
+    UEModelInfo,
+    UEQuantityModel,
+    UEReference,
+    UEStrKeyFloatValuePair,
+)
 
 
 class UEBuildObjectProperties(UEBaseModel):
     name: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="Name")
     description: UELocalizedString | UECultureInvariantString | None = Field(default=None, alias="Description")
     build_requirements: list[UEQuantityModel] = Field(default_factory=list, alias="BuildRequirements")
+    build_requirements_per_square_meter: list[UEQuantityModel] = Field(default_factory=list, alias="BuildRequirementsPerSquareMeter")
     tool_object_requirements: list[UEReference] = Field(default_factory=list, alias="ToolObjectRequirements")
     stat_requirements: list[UEStrKeyFloatValuePair] = Field(default_factory=list, alias="StatRequirements")
     maintenance_cost: list[UEQuantityModel] = Field(default_factory=list, alias="MaintenanceCost")
     result_xp: list[UEStrKeyFloatValuePair] = Field(default_factory=list, alias="XPOnBuild")
+    build_object: UEReference | None = Field(default=None, alias="BuildObject")
     build_object_category: UEReference | None = Field(default=None, alias="BuildObjectCategory")
     resulting_actor: UEReference | None = Field(default=None, alias="ResultingActor")
 

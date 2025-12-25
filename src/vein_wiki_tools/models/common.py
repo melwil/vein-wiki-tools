@@ -149,7 +149,8 @@ class ItemCountReference(WikiReference):
 
     def __str__(self) -> str:
         base = super().__str__()
-        return f"{self.count}× {base}"
+        print("count is", round(self.count, 0))
+        return f"{round(self.count,0)}× {base}"
 
 
 @dataclass
@@ -314,7 +315,9 @@ def get_wiki_fluid_span_string(fluid_ml_min: float, fluid_ml_max: float) -> str:
         fluid_ml_max /= 1000
         metric_unit = "L"
     if fluid_ml_min == fluid_ml_max:
-        return f"{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_max:.1f} {metric_unit}"
+        return (
+            f"{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_max:.1f} {metric_unit}"
+        )
     return f"{imperial_capacity_min:.3f}-{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_min:.1f}-{fluid_ml_max:.1f} {metric_unit}"
 
 
@@ -384,27 +387,22 @@ class Construction:
     def tools_str(self) -> str:
         if len(self.tool_requirements) == 0:
             return "No tools required"
-        return "<br>".join(str(self.tool_requirements))
+        return "<br>".join(str(t) for t in self.tool_requirements)
 
     def maintenance_str(self) -> str:
         if len(self.maintenance_costs) == 0:
             return "No maintenance cost"
-        return "<br>".join(str(self.maintenance_costs))
+        return "<br>".join(str(m) for m in self.maintenance_costs)
 
     def build_requirements_str(self) -> str:
         if len(self.build_requirements) == 0:
             return "No materials required"
-        return "<br>".join(str(self.build_requirements))
+        return "<br>".join(str(r) for r in self.build_requirements)
 
     def stat_requirements_str(self) -> str:
         if len(self.stat_requirements) == 0:
             return "No stats required"
-        return "<br>".join(str(self.stat_requirements))
-
-    def xp_rewards_str(self) -> str:
-        if len(self.xp_rewards) == 0:
-            return ""
-        return "<br>".join(str(self.xp_rewards))
+        return "<br>".join(str(s) for s in self.stat_requirements)
 
     def validate(self) -> Construction | None:
         return self if len(self.build_requirements) > 0 else None

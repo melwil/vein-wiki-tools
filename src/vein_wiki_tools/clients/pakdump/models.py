@@ -102,12 +102,12 @@ class UEModel(UEBaseModel):
         if obj := getattr(self, "object", None):
             if props := getattr(obj, "properties", None):
                 if name := getattr(props, "name", None):
-                    return str(name)
+                    return str(name).strip()
         if props := getattr(self, "properties", None):
             if name := getattr(props, "name", None):
-                return str(name)
+                return str(name).strip()
             if label := getattr(props, "label", None):
-                return str(label)
+                return str(label).strip()
         if match := re.match(r".*?_([^_]+)(_C)?", self.name):
             return "".join(" " + c if c.isupper() else c for c in match.group(1)).strip()
         raise ValueError(f"Unable to produce a display name for {self.get_object_name()}")

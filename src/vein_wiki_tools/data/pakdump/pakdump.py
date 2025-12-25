@@ -8,7 +8,11 @@ import tqdm
 
 from vein_wiki_tools.clients.pakdump.consumables import UEFluidDefinition
 from vein_wiki_tools.clients.pakdump.firearms import UEBulletType
-from vein_wiki_tools.clients.pakdump.models import UEBlueprintGeneratedClass, UEItemType, UEModel
+from vein_wiki_tools.clients.pakdump.models import (
+    UEBlueprintGeneratedClass,
+    UEItemType,
+    UEModel,
+)
 from vein_wiki_tools.clients.pakdump.services import get_ue_model_by_path
 from vein_wiki_tools.clients.pakdump.tools import UETool
 from vein_wiki_tools.data.models import Graph
@@ -112,7 +116,9 @@ async def import_ammo(data: PakdumpData) -> None:
         logger.debug("Importing ammo from %s", ammo_file)
         ue_model = get_ue_model_by_path(ammo_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning ammo: {ammo_file}")
+            logger.warning(
+                f"Expected BGC, found {type(ue_model)} when scanning ammo: {ammo_file}"
+            )
             continue
         ue_model.model_info.console_name = ammo_file.stem
         ammo_node = data.graph.upsert(ue_model)
@@ -134,7 +140,9 @@ async def import_magazines(data: PakdumpData) -> None:
         logger.debug("Importing magazine from %s", magazine_file)
         ue_model = get_ue_model_by_path(magazine_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning magazine: {magazine_file}")
+            logger.warning(
+                f"Expected BGC, found {type(ue_model)} when scanning magazine: {magazine_file}"
+            )
             continue
         ue_model.model_info.console_name = magazine_file.stem
         magazine_node = data.graph.upsert(ue_model)
@@ -156,7 +164,9 @@ async def import_firearms(data: PakdumpData) -> None:
         logger.debug("Importing firearm from %s", weapon_file)
         ue_model = get_ue_model_by_path(weapon_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning weapon: {weapon_file}")
+            logger.warning(
+                f"Expected BGC, found {type(ue_model)} when scanning weapon: {weapon_file}"
+            )
             continue
         ue_model.model_info.console_name = weapon_file.stem
         weapon_node = data.graph.upsert(ue_model)
@@ -197,7 +207,9 @@ async def import_fluid_container_category(
     for file in import_folder.glob("BP_*.json"):
         ue_model = get_ue_model_by_path(file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning fluid containers: {file}")
+            logger.warning(
+                f"Expected BGC, found {type(ue_model)} when scanning fluid containers: {file}"
+            )
             continue
         ue_model.model_info.console_name = file.stem
         fluid_container_node = data.graph.upsert(ue_model)
