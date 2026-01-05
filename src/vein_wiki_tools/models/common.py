@@ -149,8 +149,7 @@ class ItemCountReference(WikiReference):
 
     def __str__(self) -> str:
         base = super().__str__()
-        print("count is", round(self.count, 0))
-        return f"{round(self.count,0)}× {base}"
+        return f"{self.count}× {base}"
 
 
 @dataclass
@@ -315,9 +314,7 @@ def get_wiki_fluid_span_string(fluid_ml_min: float, fluid_ml_max: float) -> str:
         fluid_ml_max /= 1000
         metric_unit = "L"
     if fluid_ml_min == fluid_ml_max:
-        return (
-            f"{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_max:.1f} {metric_unit}"
-        )
+        return f"{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_max:.1f} {metric_unit}"
     return f"{imperial_capacity_min:.3f}-{imperial_capacity_max:.3f} fl. oz.<br>{fluid_ml_min:.1f}-{fluid_ml_max:.1f} {metric_unit}"
 
 

@@ -73,17 +73,13 @@ def get_ue_model_by_path(path: Path) -> UEModel:
             if "Template" in obj:
                 template = UEReference.model_validate(obj["Template"])
                 if template is None:
-                    raise ValueError(
-                        f"Template reference can't be handled in file: {path}"
-                    )
+                    raise ValueError(f"Template reference can't be handled in file: {path}")
                 template_model = get_ue_model_by_reference(template)
                 if not isinstance(template_model, UEBlueprintGeneratedClass):
                     raise ValueError(f"Template model is not a UEModel in file: {path}")
                 if template_model.object is None:
                     raise ValueError(f"Template model has no object in file: {path}")
-                temp_props = template_model.object.properties.model_dump(
-                    exclude_none=True, exclude_unset=True
-                )
+                temp_props = template_model.object.properties.model_dump(exclude_none=True, exclude_unset=True)
                 temp_props.update(obj.get("Properties", {}))
                 obj["Properties"] = temp_props
                 model["SuperStruct"] = template_model.super_struct
@@ -148,9 +144,7 @@ async def prep_context_for_ue_model(node: Node, graph: Graph) -> dict:
 
 async def get_pre(node: Node, graph: Graph) -> list[str]:
     model_info = node.ue_model.model_info
-    pre = [
-        f"'''{node.ue_model.display_name()}''' is a type of {model_info.super_type}."
-    ]
+    pre = [f"'''{node.ue_model.display_name()}''' is a type of {model_info.super_type}."]
     if sub := model_info.sub_type:
         pre.append(f"It's in the {sub} category.")
     return pre
@@ -185,13 +179,9 @@ async def get_infobox(node: Node, graph: Graph) -> Infobox | None:
             smell_text=node.ue_model.get_prop("smell_text"),
             smell_rotten_text=node.ue_model.get_prop("smell_rotten_text"),
             decays=node.ue_model.get_prop("decays"),
-            thirst_satisfaction_per_ml=node.ue_model.get_prop(
-                "thirst_satisfaction_per_ml"
-            ),
+            thirst_satisfaction_per_ml=node.ue_model.get_prop("thirst_satisfaction_per_ml"),
             density=node.ue_model.get_prop("density"),
-            freezing_point=get_wiki_temperature_string(
-                temp_f=node.ue_model.get_prop("freezing_point_f")
-            ),
+            freezing_point=get_wiki_temperature_string(temp_f=node.ue_model.get_prop("freezing_point_f")),
             sanitizes_wounds=node.ue_model.get_prop("sanitizes_wounds"),
             scent_strength=node.ue_model.get_prop("scent_strength"),
             scent_radius=node.ue_model.get_prop("scent_radius"),
@@ -242,9 +232,7 @@ def get_tool_setup(node: Node, graph: Graph) -> str | None:
     if tool_setup := node.ue_model.get_prop("tool_setup"):
         for tool_ref in tool_setup.tools:
             if tool_node := graph.get_node(tool_ref.object_name, ue_model_type=UETool):
-                tool_groups.append(
-                    WikiReference(text=tool_node.ue_model.display_name())
-                )
+                tool_groups.append(WikiReference(text=tool_node.ue_model.display_name()))
     if tool_groups:
         return ", ".join([str(t) for t in tool_groups])
     return None
@@ -285,22 +273,16 @@ def get_bullet_info(node: Node, graph: Graph) -> tuple[str, str] | None:
     ammo = magazine.ue_model.get_prop("bullet_type")
     if ammo is None:
         return None
-    ammo_node = graph.get_node(
-        key=ammo.object_name, ue_model_type=UEBlueprintGeneratedClass
-    )
+    ammo_node = graph.get_node(key=ammo.object_name, ue_model_type=UEBlueprintGeneratedClass)
     if ammo_node is None:
         return None
     bullet_type = ammo_node.ue_model.get_prop("bullet_type")
     if bullet_type is None:
         return None
-    bullet_type_node = graph.get_node(
-        key=bullet_type.object_name, ue_model_type=UEBulletType
-    )
+    bullet_type_node = graph.get_node(key=bullet_type.object_name, ue_model_type=UEBulletType)
     if bullet_type_node is None:
         return None
-    return ammo_node.ue_model.display_name(), str(
-        round(bullet_type_node.ue_model.properties.bullet_damage)
-    )
+    return ammo_node.ue_model.display_name(), str(round(bullet_type_node.ue_model.properties.bullet_damage))
 
 
 def get_magazine_capacity_string(node: Node) -> str | None:
@@ -310,14 +292,10 @@ def get_magazine_capacity_string(node: Node) -> str | None:
         capacity = mag.ue_model.get_prop("capacity")
         if capacity is None:
             if weapon_ammo_capacity := node.ue_model.get_prop("ammo_capacity"):
-                magazine_strings.append(
-                    f"[[{mag.ue_model.display_name().replace(' ', '_')}|{weapon_ammo_capacity} Rounds]]"
-                )
+                magazine_strings.append(f"[[{mag.ue_model.display_name().replace(' ', '_')}|{weapon_ammo_capacity} Rounds]]")
             continue
         if capacity is not None:
-            magazine_strings.append(
-                f"[[{mag.ue_model.display_name().replace(' ', '_')}|{capacity} Rounds]]"
-            )
+            magazine_strings.append(f"[[{mag.ue_model.display_name().replace(' ', '_')}|{capacity} Rounds]]")
     if not magazine_strings:
         if weapon_ammo_capacity := node.ue_model.get_prop("ammo_capacity"):
             return f"{weapon_ammo_capacity} Rounds"
@@ -363,10 +341,7 @@ async def get_usages(node: Node, graph: Graph) -> dict[str, Any]:
         usages["dismantle_into"] = await get_dismantling_results(dismantling_results)
     if node.ue_model.get_prop("repair_ingredients") is not None:
         usages["repair"] = await get_repair_requirements(node=node)
-    if (
-        node.ue_model.get_prop("conditions_on_drink") is not None
-        or node.ue_model.get_prop("conditions_on_inject") is not None
-    ):
+    if node.ue_model.get_prop("conditions_on_drink") is not None or node.ue_model.get_prop("conditions_on_inject") is not None:
         usages["conditions"] = await get_conditions(ue_model=node.ue_model)
     if node.ue_model.get_prop("valid_batteries") is not None:
         usages["requirements"] = await get_tool_requirements(node=node, graph=graph)
@@ -378,15 +353,11 @@ async def get_construction_info(node: Node, graph: Graph) -> Construction | None
     if build_requirements := node.ue_model.get_prop("build_requirements"):
         for req in build_requirements:
             tool_model = get_ue_model_by_reference(req.item)
-            result.build_requirements.append(
-                ItemCountReference(text=tool_model.display_name(), count=req.quantity)
-            )
+            result.build_requirements.append(ItemCountReference(text=tool_model.display_name(), count=req.quantity))
     if tools := node.ue_model.get_prop("tool_object_requirements"):
         for tool in tools:
             tool_model = get_ue_model_by_reference(tool)
-            result.tool_requirements.append(
-                WikiReference(text=tool_model.display_name())
-            )
+            result.tool_requirements.append(WikiReference(text=tool_model.display_name()))
     if stat_requirements := node.ue_model.get_prop("stat_requirements"):
         for stat in stat_requirements:
             if match := SKILL_PATTERN.match(stat.key):
@@ -394,15 +365,13 @@ async def get_construction_info(node: Node, graph: Graph) -> Construction | None
                 result.stat_requirements.append(
                     ItemCountReference(
                         text=match.group(1),
-                        count=stat.value,
+                        count=int(stat.value),
                     )
                 )
     if maintenance_costs := node.ue_model.get_prop("maintenance_cost"):
         for cost in maintenance_costs:
             cost_model = get_ue_model_by_reference(cost.item)
-            result.maintenance_costs.append(
-                ItemCountReference(text=cost_model.display_name(), count=cost.quantity)
-            )
+            result.maintenance_costs.append(ItemCountReference(text=cost_model.display_name(), count=cost.quantity))
     if result_xp := node.ue_model.get_prop("result_xp"):
         for xp in result_xp:
             if match := SKILL_PATTERN.match(xp.key):
@@ -431,9 +400,7 @@ async def get_scavenging_info(node: Node, graph: Graph) -> Scavenging | None:
             )
     # show which containers a fluid can appear in
     if node.ue_model.model_info.template == "fluid":
-        neighbours = get_related_models(node=node, linktype=LinkType.HAS_FLUID)[
-            "neighbours"
-        ]
+        neighbours = get_related_models(node=node, linktype=LinkType.HAS_FLUID)["neighbours"]
         for neigh in neighbours:
             scavenging.fluids_contained.append(
                 FluidContent(
@@ -473,9 +440,7 @@ async def get_dismantling_results(dismantling_results: UEReference) -> Dismantle
             if not isinstance(item_model, UEBlueprintGeneratedClass):
                 continue
             if item.item_count.max is None:
-                logger.warning(
-                    "Item in dismantling results has no max count: %s", item_model.name
-                )
+                logger.warning("Item in dismantling results has no max count: %s", item_model.name)
                 continue
 
             dismantle_list.append(
@@ -499,9 +464,7 @@ async def get_repair_requirements(node: Node) -> Repair | None:
             ingredient_model = get_ue_model_by_reference(ingredient.item)
             if not isinstance(ingredient_model, UEBlueprintGeneratedClass):
                 continue
-            repair_items.append(
-                ItemCountReference(text=ingredient_model.display_name())
-            )
+            repair_items.append(ItemCountReference(text=ingredient_model.display_name()))
     repair_tools: list[WikiReference] = []
     if repair_tool_objects := node.ue_model.get_prop("repair_tool_objects"):
         for tool in repair_tool_objects:

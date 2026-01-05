@@ -22,6 +22,8 @@ logger = getLogger(__name__)
 LOGS_PATH = get_output_path("logs")
 LOCAL_WIKI_PATH = get_output_path("wiki")
 
+VEIN_VERSIONS = ["0.022h10"]
+
 
 async def main() -> None:
     logger.info("Starting UE model wiki page writer")
@@ -36,9 +38,7 @@ async def main() -> None:
         logger.info(f"Filtering, at: {node.ue_model.display_name()}")
         context = await prep_context_for_ue_model(node=node, graph=graph)
         if not context["infobox"].infobox_template:
-            logger.warning(
-                f"Missing infobox template for {node.ue_model.display_name()}"
-            )
+            logger.warning(f"Missing infobox template for {node.ue_model.display_name()}")
             continue
         models_to_write.append((node, context))
 
@@ -46,23 +46,27 @@ async def main() -> None:
     for n, c in tqdm.tqdm(models_to_write, desc="Writing .."):
         ue_model = n.ue_model
         logger.info(f"Rendering {ue_model.display_name()}")
-        content = await render(
-            template=f"{ue_model.model_info.template}.jinja", context=c
-        )
+        content = await render(template=f"{ue_model.model_info.template}.jinja", context=c)
         subfolder = ue_model.model_info.template
         if ue_model.model_info.super_type is not None:
             subfolder = ue_model.model_info.super_type
         if ue_model.model_info.sub_type is not None:
             subfolder = ue_model.model_info.sub_type
         await f_create_page(
-            path=LOCAL_WIKI_PATH
-            / subfolder
-            / f"{ue_model.model_info.console_name}.wiki",
+            path=LOCAL_WIKI_PATH / subfolder / f"{ue_model.model_info.console_name}.wiki",
             text=content,
             summary=f"Creating page for UE model: {ue_model.get_object_name()}",
         )
 
     # Generate stats comparing old version
+    previous_version = VEIN_VERSIONS[-1]
+    previous_version_root = get_output_path(previous_version)
+    new_files = not_found = 0
+    if previous_version_root is not None and previous_version_root.is_dir():
+        for file in tqdm.tqdm(get_output_path(previous_version).glob("**/*"), f"Comparing to {previous_version}"):
+            pass
+    else:
+        logger.info("Found no previous output to compare for version %s", previous_version)
 
     # Backup from wiki
     if False:
