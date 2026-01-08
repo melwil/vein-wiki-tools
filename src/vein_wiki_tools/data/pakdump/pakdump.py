@@ -116,9 +116,7 @@ async def import_ammo(data: PakdumpData) -> None:
         logger.debug("Importing ammo from %s", ammo_file)
         ue_model = get_ue_model_by_path(ammo_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(
-                f"Expected BGC, found {type(ue_model)} when scanning ammo: {ammo_file}"
-            )
+            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning ammo: {ammo_file}")
             continue
         ue_model.model_info.console_name = ammo_file.stem
         ammo_node = data.graph.upsert(ue_model)
@@ -140,9 +138,7 @@ async def import_magazines(data: PakdumpData) -> None:
         logger.debug("Importing magazine from %s", magazine_file)
         ue_model = get_ue_model_by_path(magazine_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(
-                f"Expected BGC, found {type(ue_model)} when scanning magazine: {magazine_file}"
-            )
+            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning magazine: {magazine_file}")
             continue
         ue_model.model_info.console_name = magazine_file.stem
         magazine_node = data.graph.upsert(ue_model)
@@ -164,9 +160,7 @@ async def import_firearms(data: PakdumpData) -> None:
         logger.debug("Importing firearm from %s", weapon_file)
         ue_model = get_ue_model_by_path(weapon_file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(
-                f"Expected BGC, found {type(ue_model)} when scanning weapon: {weapon_file}"
-            )
+            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning weapon: {weapon_file}")
             continue
         ue_model.model_info.console_name = weapon_file.stem
         weapon_node = data.graph.upsert(ue_model)
@@ -207,9 +201,7 @@ async def import_fluid_container_category(
     for file in import_folder.glob("BP_*.json"):
         ue_model = get_ue_model_by_path(file)
         if not isinstance(ue_model, UEBlueprintGeneratedClass):
-            logger.warning(
-                f"Expected BGC, found {type(ue_model)} when scanning fluid containers: {file}"
-            )
+            logger.warning(f"Expected BGC, found {type(ue_model)} when scanning fluid containers: {file}")
             continue
         ue_model.model_info.console_name = file.stem
         fluid_container_node = data.graph.upsert(ue_model)
@@ -250,7 +242,25 @@ folders = (
     # "Fluids",
     # "Tools",
     # ("Items", ("Ammo", "Tools")),
-    # ("Items", ("Clothing", ("01_Head", "02_Face", "03_Jacket", "04a_Upper", "04b_UpperArmor", "05a_Lower", "05b_LowerArmor", "06_Feet", "07_Hands", "08_Back", "09_FullBody"))),
+    # (
+    #     "Items",
+    #     (
+    #         "Clothing",
+    #         (
+    #             "01_Head",
+    #             "02_Face",
+    #             "03_Jacket",
+    #             "04a_Upper",
+    #             "04b_UpperArmor",
+    #             "05a_Lower",
+    #             "05b_LowerArmor",
+    #             "06_Feet",
+    #             "07_Hands",
+    #             "08_Back",
+    #             "09_FullBody",
+    #         ),
+    #     ),
+    # ),
     # ("Items", ("Consumables", ("01Drink", "ALL"))),
     # ("Items", ("Weapons", "ALL")),
 )
@@ -272,7 +282,7 @@ def get_folder(path: Path, subfolders: tuple) -> Generator[Path]:
                 subpath = path / sf[0]
                 yield from get_folder(
                     path=subpath,
-                    subfolders=tuple(subpath.glob("**/*")),
+                    subfolders=tuple(p for p in subpath.glob("**/*") if p.is_dir()),
                 )
                 yield from get_folder(path=path, subfolders=(sf[0],))
                 continue
@@ -281,7 +291,7 @@ def get_folder(path: Path, subfolders: tuple) -> Generator[Path]:
                 continue
         if not isinstance(sf, str):
             continue
-        logger.debug(f"Processing: {path / sf}")
+        logger.debug(f"Yielding: {path / sf}")
         yield path / sf
 
 
@@ -296,17 +306,24 @@ async def import_folder(data: PakdumpData, path: Path) -> None:
     if not (root_node := data.graph.root_node):
         raise ValueError("Graph has no root node")
 
+    num_files_in_folder = 0
     for file in path.glob("*.json"):
+        # skip these conditions
         if re.match(r"Meshes|OLD", file.parent.name):
             continue
-        if re.match(r"(BP|NS|HDP|SM)_.*", file.stem):
+        if re.match(r"(NS|HDP|SM)_.*", file.stem):
             continue
-        # logger.debug(f"Processing {file}")
+        if re.match(r".*/BuildObjects/.*BP_.*", str(file)):
+            continue
         if file.stem.startswith("T_Thumb"):
             continue
+
+        # logger.debug(f"Processing {file}")
         ue_model = get_ue_model_by_path(file)
         ue_model.model_info.console_name = file.stem
         node = data.graph.upsert(ue_model)
+
+        num_files_in_folder += 1
 
         # Item types
         if ue_model.type == "ItemType":
@@ -319,19 +336,23 @@ async def import_folder(data: PakdumpData, path: Path) -> None:
             node.add_edge(LinkType.HAS_ITEM_TYPE, itemtype_node)
 
         # Other connections
+
+        # Link fluid containers spawning contents to the fluid
         if fluid_type := ue_model.get_prop("fluid_type"):
             if fluid_node := data.graph.get_node(
                 key=fluid_type.object_name,
                 ue_model_type=UEFluidDefinition,
             ):
                 node.add_edge(LinkType.HAS_FLUID, fluid_node)
+        # The type of magazine for a firearm
         if magazine_items := ue_model.get_prop("magazine_items"):
             for magazine in magazine_items:
-                if magazine_node := data.graph.get_node(
+                if fluid_node := data.graph.get_node(
                     key=magazine.object_name,
                     ue_model_type=UEBlueprintGeneratedClass,
                 ):
-                    node.add_edge(LinkType.HAS_MAGAZINE, magazine_node)
+                    node.add_edge(LinkType.HAS_MAGAZINE, fluid_node)
+        # The type of ammo for a magazine
         if ue_model.model_info.sub_type == "magazine":
             if bullet_type := ue_model.get_prop("bullet_type"):
                 if bullet_node := data.graph.get_node(
@@ -340,6 +361,7 @@ async def import_folder(data: PakdumpData, path: Path) -> None:
                 ):
                     if isinstance(bullet_node.ue_model, UEBlueprintGeneratedClass):
                         node.add_edge(LinkType.HAS_AMMO, bullet_node)
+        # The bullet type for ammo
         if ue_model.model_info.sub_type == "bullet":
             if bullet_type := ue_model.get_prop("bullet_type"):
                 if bullet_node := data.graph.get_node(
@@ -348,3 +370,5 @@ async def import_folder(data: PakdumpData, path: Path) -> None:
                 ):
                     if isinstance(bullet_node.ue_model, UEBulletType):
                         node.add_edge(LinkType.HAS_BULLET_TYPE, bullet_node)
+
+    logger.info(f"Imported {num_files_in_folder} files from {path}")

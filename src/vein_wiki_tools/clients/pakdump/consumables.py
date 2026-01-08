@@ -1,6 +1,14 @@
 from pydantic import Field
 
-from vein_wiki_tools.clients.pakdump.models import UEBaseModel, UECultureInvariantString, UELocalizedString, UEModel, UEModelInfo, UEReference, UEStrKeyFloatValuePair
+from vein_wiki_tools.clients.pakdump.models import (
+    UEBaseModel,
+    UECultureInvariantString,
+    UELocalizedString,
+    UEModel,
+    UEModelInfo,
+    UEReference,
+    UEStrKeyFloatValuePair,
+)
 
 
 class UEFluidDefinitionProperties(UEBaseModel):

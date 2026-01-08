@@ -34,8 +34,9 @@ async def main() -> None:
     models_to_write: list[tuple[Node, dict]] = []
     for node in tqdm.tqdm(graph.nodes.values(), desc="Filtering .."):
         if node.ue_model.model_info.template is None:
+            # logger.warning(f"Missing template for {str(node.ue_model)}")
             continue
-        logger.info(f"Filtering, at: {node.ue_model.display_name()}")
+        # logger.info(f"Filtering, at: {node.ue_model.display_name()}")
         context = await prep_context_for_ue_model(node=node, graph=graph)
         if not context["infobox"].infobox_template:
             logger.warning(f"Missing infobox template for {node.ue_model.display_name()}")
@@ -45,7 +46,7 @@ async def main() -> None:
     # Render pages
     for n, c in tqdm.tqdm(models_to_write, desc="Writing .."):
         ue_model = n.ue_model
-        logger.info(f"Rendering {ue_model.display_name()}")
+        # logger.info(f"Rendering {ue_model.display_name()}")
         content = await render(template=f"{ue_model.model_info.template}.jinja", context=c)
         subfolder = ue_model.model_info.template
         if ue_model.model_info.super_type is not None:
@@ -61,12 +62,31 @@ async def main() -> None:
     # Generate stats comparing old version
     previous_version = VEIN_VERSIONS[-1]
     previous_version_root = get_output_path(previous_version)
-    new_files = not_found = 0
+    new_files = updated = not_found = unchanged = 0
+    verified_files: list[Path] = []
     if previous_version_root is not None and previous_version_root.is_dir():
-        for file in tqdm.tqdm(get_output_path(previous_version).glob("**/*"), f"Comparing to {previous_version}"):
-            pass
+        previous_version_files = list(previous_version_root.glob("**/*"))
+        for previous_file in tqdm.tqdm(previous_version_files, f"Comparing to {previous_version}"):
+            relative_path = previous_file.relative_to(previous_version_root)
+            new_file_path = LOCAL_WIKI_PATH / relative_path
+            if new_file_path.is_file():
+                verified_files.append(new_file_path)
+                if not compare_files(previous_file, new_file_path):
+                    logger.info("Updated file: %s", str(relative_path))
+                    updated += 1
+                else:
+                    unchanged += 1
+            else:
+                logger.info("Missing file: %s", str(relative_path))
+                not_found += 1
     else:
         logger.info("Found no previous output to compare for version %s", previous_version)
+
+    for file in LOCAL_WIKI_PATH.glob("**/*"):
+        if file not in verified_files:
+            relative_path = file.relative_to(LOCAL_WIKI_PATH)
+            logger.info("New file: %s", str(relative_path))
+            new_files += 1
 
     # Backup from wiki
     if False:
@@ -75,6 +95,11 @@ async def main() -> None:
     # Write to wiki
     if False:
         pass
+
+
+def compare_files(file1: Path, file2: Path) -> bool:
+    """Compare two files for equality."""
+    return file1.read_text() == file2.read_text()
 
 
 if __name__ == "__main__":

@@ -134,7 +134,7 @@ async def test_get_scavenging_info_fl_steroids(testfiles):
     assert steroid_node is not None
     scavenging = await services.get_scavenging_info(node=steroid_node, graph=data.graph)
     assert scavenging is not None
-    assert len(scavenging.fluids_contained) == 0
+    assert len(scavenging.fluids_contained) == 1
 
 
 async def test_get_conditions_beer(testfiles):

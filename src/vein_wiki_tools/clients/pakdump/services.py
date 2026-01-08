@@ -186,8 +186,9 @@ async def get_infobox(node: Node, graph: Graph) -> Infobox | None:
             scent_strength=node.ue_model.get_prop("scent_strength"),
             scent_radius=node.ue_model.get_prop("scent_radius"),
             scent_radius_sqt=node.ue_model.get_prop("scent_radius_sqt"),
+            detergent_multiplier=node.ue_model.get_prop("detergent_multiplier"),
         )
-    if node.ue_model.model_info.sub_type in ["melee", "firearm"]:
+    if node.ue_model.model_info.sub_type in ["melee", "firearm", "weapons"]:
         bullet_info = get_bullet_info(node, graph)
         melee_damage: str | None = None
         melee_dps: str | None = None
@@ -361,7 +362,6 @@ async def get_construction_info(node: Node, graph: Graph) -> Construction | None
     if stat_requirements := node.ue_model.get_prop("stat_requirements"):
         for stat in stat_requirements:
             if match := SKILL_PATTERN.match(stat.key):
-                print("stat setting", stat.value)
                 result.stat_requirements.append(
                     ItemCountReference(
                         text=match.group(1),
@@ -399,7 +399,7 @@ async def get_scavenging_info(node: Node, graph: Graph) -> Scavenging | None:
                 )
             )
     # show which containers a fluid can appear in
-    if node.ue_model.model_info.template == "fluid":
+    if node.ue_model.model_info.super_type == "fluid":
         neighbours = get_related_models(node=node, linktype=LinkType.HAS_FLUID)["neighbours"]
         for neigh in neighbours:
             scavenging.fluids_contained.append(
